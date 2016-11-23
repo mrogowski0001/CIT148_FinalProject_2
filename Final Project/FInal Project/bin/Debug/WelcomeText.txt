@@ -1,0 +1,7 @@
+Welcome to the Final Project Quiz. This is a sample quiz made in Visual Basic that uses text files to import questions and answers.
+
+When the quiz loads, you will see the first question and four radio buttons to select from. Once you have made your selection you can move on to the next question. If you are unsure of the correct answer, you can return to the question before you submit your quiz. 
+
+If you check your answer, your answer will be locked in and you will not be able to make changes to any checked answers. The number of correct and incorrect answers that you have checked will be displayed at the bottom of the window. 
+
+NOTE: There is a time limit based on the total number of questions. If you do not finish the quiz in the alloted time the quiz will automatically be submitted. Good luck!
