@@ -9,20 +9,20 @@
 
     Private Sub btnContinue_Click() Handles btnContinue.Click
 
-        'If the user chooses to continue the quiz and answer the remaining questions, hide this form
-        Me.Hide()
+        'If the user chooses to continue the quiz and answer the remaining questions, close this form
+        Me.Close()
 
     End Sub
 
     Private Sub btnSubmit_Click() Handles btnSubmit.Click
 
         'If the user chooses to submit the quiz with the unanswered questions 
-        Dim frmQuiz As frmQuiz = DirectCast(Me.Owner, frmQuiz)              'Take ownership of the frmQuiz to ba able to stop the timers
-        frmQuiz.Timer1.Enabled = False                                      'Stop Timer1
-        frmQuiz.Timer2.Enabled = False                                      'Stop Timer2
-        frmQuiz.Hide()                                                      'Hide the quiz form
-        frmSummary.Show()                                                   'Show the summary form
-        Me.Hide()                                                           'Hide the warning form
+        Dim frmQuiz As frmQuiz = DirectCast(Me.Owner, frmQuiz)                  'Take ownership of the frmQuiz to ba able to stop the timers
+        frmQuiz.Timer1.Enabled = False                                          'Stop Timer1
+        frmQuiz.Timer2.Enabled = False                                          'Stop Timer2
+        frmQuiz.Close()                                                         'Hide the quiz form
+        frmSummary.Show()                                                       'Show the summary form
+        Me.Hide()                                                               'Hide the warning form
 
     End Sub
 

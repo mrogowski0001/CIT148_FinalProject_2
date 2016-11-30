@@ -27,6 +27,7 @@ Partial Class frmSummary
         Me.lblTitle1 = New System.Windows.Forms.Label()
         Me.lblTitle2 = New System.Windows.Forms.Label()
         Me.btnExitQuiz = New System.Windows.Forms.Button()
+        Me.btnNewQuiz = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'lstSummary
@@ -68,12 +69,21 @@ Partial Class frmSummary
         '
         'btnExitQuiz
         '
-        Me.btnExitQuiz.Location = New System.Drawing.Point(260, 401)
+        Me.btnExitQuiz.Location = New System.Drawing.Point(495, 401)
         Me.btnExitQuiz.Name = "btnExitQuiz"
-        Me.btnExitQuiz.Size = New System.Drawing.Size(75, 23)
+        Me.btnExitQuiz.Size = New System.Drawing.Size(75, 35)
         Me.btnExitQuiz.TabIndex = 4
         Me.btnExitQuiz.Text = "Exit Quiz"
         Me.btnExitQuiz.UseVisualStyleBackColor = True
+        '
+        'btnNewQuiz
+        '
+        Me.btnNewQuiz.Location = New System.Drawing.Point(12, 401)
+        Me.btnNewQuiz.Name = "btnNewQuiz"
+        Me.btnNewQuiz.Size = New System.Drawing.Size(131, 35)
+        Me.btnNewQuiz.TabIndex = 5
+        Me.btnNewQuiz.Text = "Take Another Quiz"
+        Me.btnNewQuiz.UseVisualStyleBackColor = True
         '
         'frmSummary
         '
@@ -81,6 +91,7 @@ Partial Class frmSummary
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(585, 448)
         Me.ControlBox = False
+        Me.Controls.Add(Me.btnNewQuiz)
         Me.Controls.Add(Me.btnExitQuiz)
         Me.Controls.Add(Me.lblTitle2)
         Me.Controls.Add(Me.lblTitle1)
@@ -97,4 +108,5 @@ Partial Class frmSummary
     Public WithEvents lblTitle1 As System.Windows.Forms.Label
     Public WithEvents lblTitle2 As System.Windows.Forms.Label
     Friend WithEvents btnExitQuiz As System.Windows.Forms.Button
+    Friend WithEvents btnNewQuiz As System.Windows.Forms.Button
 End Class

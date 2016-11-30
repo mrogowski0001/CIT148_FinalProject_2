@@ -6,10 +6,10 @@
 
         Do
             If gradedAnswers(count) = "Correct" Then
-                totalCorrect += 1                       'adds 1 to the total of correct answers
+                totalCorrect += 1                                   'adds 1 to the total of correct answers
             End If
-            count += 1                                  'Adds 1 to the counter variable
-        Loop Until count = totalQuestions           'Stops the loop when the counter has reached the total number of questions in the quiz
+            count += 1                                              'Adds 1 to the counter variable
+        Loop Until count = totalQuestions                           'Stops the loop when the counter has reached the total number of questions in the quiz
 
         'Declare a variable to hold the summary text to display to the user to prevent haveing to have multiple instances of the same information
         Dim sumText As String = ("You correctly answered " & totalCorrect.ToString & " questions out of " & totalQuestions.ToString & ".")
@@ -54,4 +54,11 @@
         'Exit the application
         Application.Exit()
     End Sub
+
+    Private Sub BbtnNewQuiz_Click() Handles btnNewQuiz.Click
+
+        frmChooseChapter.Show()
+        Me.Close()
+    End Sub
+
 End Class

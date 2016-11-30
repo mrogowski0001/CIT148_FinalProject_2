@@ -9,7 +9,6 @@
 
         'Open the quiz form and hides the welcome form
         frmChooseChapter.Show()
-        'quizForm.Show()
         Me.Hide()
 
     End Sub

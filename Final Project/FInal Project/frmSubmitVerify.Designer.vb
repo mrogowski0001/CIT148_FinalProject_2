@@ -50,18 +50,18 @@ Partial Class frmSubmitVerify
         '
         'btnSubmit
         '
-        Me.btnSubmit.Location = New System.Drawing.Point(55, 210)
+        Me.btnSubmit.Location = New System.Drawing.Point(54, 210)
         Me.btnSubmit.Name = "btnSubmit"
-        Me.btnSubmit.Size = New System.Drawing.Size(75, 23)
+        Me.btnSubmit.Size = New System.Drawing.Size(94, 23)
         Me.btnSubmit.TabIndex = 2
         Me.btnSubmit.Text = "Submit Quiz"
         Me.btnSubmit.UseVisualStyleBackColor = True
         '
         'btnContinue
         '
-        Me.btnContinue.Location = New System.Drawing.Point(281, 209)
+        Me.btnContinue.Location = New System.Drawing.Point(260, 210)
         Me.btnContinue.Name = "btnContinue"
-        Me.btnContinue.Size = New System.Drawing.Size(75, 23)
+        Me.btnContinue.Size = New System.Drawing.Size(94, 23)
         Me.btnContinue.TabIndex = 3
         Me.btnContinue.Text = "Continue Quiz"
         Me.btnContinue.UseVisualStyleBackColor = True

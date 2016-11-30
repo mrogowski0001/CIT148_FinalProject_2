@@ -9,7 +9,7 @@
         Me.QuestionsTableAdapter.Fill(Me.QuizDataSet.Questions)
 
         'Set the text for the instructions label
-        lblInstruction.Text = "To add a chapter, select the chapter on the left and click 'Add to Quiz'"
+        lblInstruction.Text = "To add a chapter, select the chapter on the left and click 'Add Selected to Quiz'." & Environment.NewLine & "To all add all chapters, click 'Add all to Quiz'." & Environment.NewLine & "To remove a chapter, select the chapter in the right list and click 'Remove from Quiz'." & Environment.NewLine & "To remove all items from the quiz, click 'Remove all from Quiz'."
 
         'Query the total number of chapters and REDim the chapters array to equal the total number of chapters
         numChapters = ChapterCount()
@@ -96,7 +96,6 @@
         End If
     End Sub
 
-    '
     Private Sub lstChapters_SelectedIndexChanged() Handles lstChapters.SelectedIndexChanged
         currentChapter = lstChapters.Text
     End Sub
@@ -104,7 +103,7 @@
     'Starts the quiz
     Private Sub btnStart_Click() Handles btnStart.Click
         frmQuiz.Show()
-        Me.Hide()
+        Me.Close()
     End Sub
 
     Private Sub btnAllQuestions_Click() Handles btnAllQuestions.Click

@@ -25,6 +25,7 @@ Partial Class frmChooseChapter
         Me.components = New System.ComponentModel.Container()
         Me.lstChapters = New System.Windows.Forms.ListBox()
         Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.QuizDataSet = New FInal_Project.QuizDataSet()
         Me.btnAdd = New System.Windows.Forms.Button()
         Me.btnRemove = New System.Windows.Forms.Button()
         Me.btnReset = New System.Windows.Forms.Button()
@@ -35,7 +36,6 @@ Partial Class frmChooseChapter
         Me.lblSelectedChapters = New System.Windows.Forms.Label()
         Me.lblInstruction = New System.Windows.Forms.Label()
         Me.lblTitle = New System.Windows.Forms.Label()
-        Me.QuizDataSet = New FInal_Project.QuizDataSet()
         Me.QuestionsTableAdapter = New FInal_Project.QuizDataSetTableAdapters.QuestionsTableAdapter()
         CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.QuizDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -55,6 +55,11 @@ Partial Class frmChooseChapter
         Me.BindingSource1.DataMember = "Questions"
         Me.BindingSource1.DataSource = Me.QuizDataSet
         '
+        'QuizDataSet
+        '
+        Me.QuizDataSet.DataSetName = "QuizDataSet"
+        Me.QuizDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
         'btnAdd
         '
         Me.btnAdd.Location = New System.Drawing.Point(199, 132)
@@ -66,7 +71,7 @@ Partial Class frmChooseChapter
         '
         'btnRemove
         '
-        Me.btnRemove.Location = New System.Drawing.Point(307, 181)
+        Me.btnRemove.Location = New System.Drawing.Point(307, 132)
         Me.btnRemove.Name = "btnRemove"
         Me.btnRemove.Size = New System.Drawing.Size(100, 43)
         Me.btnRemove.TabIndex = 4
@@ -75,7 +80,7 @@ Partial Class frmChooseChapter
         '
         'btnReset
         '
-        Me.btnReset.Location = New System.Drawing.Point(307, 132)
+        Me.btnReset.Location = New System.Drawing.Point(307, 199)
         Me.btnReset.Name = "btnReset"
         Me.btnReset.Size = New System.Drawing.Size(100, 43)
         Me.btnReset.TabIndex = 5
@@ -94,7 +99,7 @@ Partial Class frmChooseChapter
         '
         'btnAllQuestions
         '
-        Me.btnAllQuestions.Location = New System.Drawing.Point(199, 181)
+        Me.btnAllQuestions.Location = New System.Drawing.Point(199, 199)
         Me.btnAllQuestions.Name = "btnAllQuestions"
         Me.btnAllQuestions.Size = New System.Drawing.Size(100, 43)
         Me.btnAllQuestions.TabIndex = 9
@@ -145,11 +150,6 @@ Partial Class frmChooseChapter
         Me.lblTitle.TabIndex = 15
         Me.lblTitle.Text = "Chapter Selection"
         Me.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'QuizDataSet
-        '
-        Me.QuizDataSet.DataSetName = "QuizDataSet"
-        Me.QuizDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'QuestionsTableAdapter
         '

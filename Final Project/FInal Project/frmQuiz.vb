@@ -73,20 +73,42 @@
         cq = qIDNums(position - 1)
 
         'Dim testText As String = "Windows Deployment Services (WDS) is a software platform and technology that allows you to perform which function?"
-        lblQuestion.Text = QueryQuestion(cq)
+        lblQuestion.Text = allQuestions(position - 1)
 
         'Set all radio buttons and check boxes to stored values if applicable
         multiSelect = QueryMultiSelect(cq)
 
         'Set the visibility of grpBoxes based on the multiselect query
         If multiSelect = True Then
-            grpRadio.Visible = False
-            grpCheck.Visible = True
-            grpCheck.Enabled = True
+            grpRadio.Text = "Select the correct answers below:"
+            radAns1.Visible = False
+            radAns2.Visible = False
+            radAns3.Visible = False
+            radAns4.Visible = False
+            radAns5.Visible = False
+            radAns6.Visible = False
+
+            chkAns1.Visible = True
+            chkAns2.Visible = True
+            chkAns3.Visible = True
+            chkAns4.Visible = True
+            chkAns5.Visible = True
+            chkAns6.Visible = True
         Else
-            grpRadio.Visible = True
-            grpCheck.Visible = False
-            grpCheck.Enabled = False
+            grpRadio.Text = "Select the correct answer below:"
+            radAns1.Visible = True
+            radAns2.Visible = True
+            radAns3.Visible = True
+            radAns4.Visible = True
+            radAns5.Visible = True
+            radAns6.Visible = True
+
+            chkAns1.Visible = False
+            chkAns2.Visible = False
+            chkAns3.Visible = False
+            chkAns4.Visible = False
+            chkAns5.Visible = False
+            chkAns6.Visible = False
         End If
 
         'Sets the radio button answers text based on the first question 
@@ -124,14 +146,14 @@
         multiSelect = QueryMultiSelect(cq)
 
         'Set the visibility of grpBoxes based on the multiselect query
-        If multiSelect = True Then
-            grpRadio.Visible = False
-            grpCheck.Visible = True
-            grpCheck.Enabled = True
-        Else
+        If multiSelect = False Then
+            grpRadio.Text = "Select the correct answers below:"
             grpRadio.Visible = True
             grpCheck.Visible = False
-            grpCheck.Enabled = False
+        Else
+            grpRadio.Text = "Select the correct answer below:"
+            grpRadio.Visible = False
+            grpCheck.Visible = True
         End If
 
         'Disable the next button on the last question to prevent an error and ensure the back button is enabled.
@@ -197,14 +219,14 @@
         multiSelect = QueryMultiSelect(cq)
 
         'Set the visibility of grpBoxes based on the multiselect query
-        If multiSelect = True Then
-            grpRadio.Visible = False
-            grpCheck.Visible = True
-            grpCheck.Enabled = True
-        Else
+        If multiSelect = False Then
+            grpRadio.Text = "Select the correct answers below:"
             grpRadio.Visible = True
             grpCheck.Visible = False
-            grpCheck.Enabled = False
+        Else
+            grpRadio.Text = "Select the correct answer below:"
+            grpRadio.Visible = False
+            grpCheck.Visible = True
         End If
 
         'Disable the previous question button if this is the first question
@@ -276,7 +298,7 @@
             btnNext.Enabled = False
 
             frmSummary.Show()
-            Me.Hide()
+            Me.Close()
         End If
 
         'Reset blank answers to 0
@@ -1095,60 +1117,72 @@
             radAns1.Visible = False
             chkAns1.Visible = False
             lblAns1.Visible = False
+            lblAns1_1.Visible = False
         Else
             radAns1.Visible = True
             chkAns1.Visible = True
             lblAns1.Visible = True
+            lblAns1_1.Visible = True
         End If
 
         If radAns2.Text = "_" Or chkAns2.Text = "_" Then
             radAns2.Visible = False
             chkAns2.Visible = False
             lblAns2.Visible = False
+            lblAns2_1.Visible = False
         Else
             radAns2.Visible = True
             chkAns2.Visible = True
             lblAns2.Visible = True
+            lblAns2_1.Visible = True
         End If
 
         If radAns3.Text = "_" Or chkAns3.Text = "_" Then
             radAns3.Visible = False
             chkAns3.Visible = False
             lblAns3.Visible = False
+            lblAns3_1.Visible = False
         Else
             radAns3.Visible = True
             chkAns3.Visible = True
             lblAns3.Visible = True
+            lblAns3_1.Visible = True
         End If
 
         If radAns4.Text = "_" Or chkAns4.Text = "_" Then
             radAns4.Visible = False
             chkAns4.Visible = False
             lblAns4.Visible = False
+            lblAns4_1.Visible = False
         Else
             radAns4.Visible = True
             chkAns4.Visible = True
             lblAns4.Visible = True
+            lblAns4_1.Visible = True
         End If
 
         If radAns5.Text = "_" Or chkAns5.Text = "_" Then
             radAns5.Visible = False
             chkAns5.Visible = False
             lblAns5.Visible = False
+            lblAns5_1.Visible = False
         Else
             radAns5.Visible = True
             chkAns5.Visible = True
             lblAns5.Visible = True
+            lblAns5_1.Visible = True
         End If
 
         If radAns6.Text = "_" Or chkAns6.Text = "_" Then
             radAns6.Visible = False
             chkAns6.Visible = False
             lblAns6.Visible = False
+            lblAns6_1.Visible = False
         Else
             radAns6.Visible = True
             chkAns6.Visible = True
             lblAns6.Visible = True
+            lblAns6_1.Visible = True
         End If
     End Sub
     Private Sub SetCurrentAnswers()
@@ -1194,5 +1228,43 @@
         exitForm.Show()
 
     End Sub
-    
+
+    Private Sub Chk_Rad_Visible()
+        If multiSelect = True Then
+            'grpRadio.Text = "Select the correct answers below:"
+            radAns1.Visible = False
+            radAns2.Visible = False
+            radAns3.Visible = False
+            radAns4.Visible = False
+            radAns5.Visible = False
+            radAns6.Visible = False
+
+            chkAns1.Visible = True
+            chkAns2.Visible = True
+            chkAns3.Visible = True
+            chkAns4.Visible = True
+            chkAns5.Visible = True
+            chkAns6.Visible = True
+        Else
+            'grpRadio.Text = "Select the correct answer below:"
+            radAns1.Visible = True
+            radAns2.Visible = True
+            radAns3.Visible = True
+            radAns4.Visible = True
+            radAns5.Visible = True
+            radAns6.Visible = True
+
+            chkAns1.Visible = False
+            chkAns2.Visible = False
+            chkAns3.Visible = False
+            chkAns4.Visible = False
+            chkAns5.Visible = False
+            chkAns6.Visible = False
+        End If
+    End Sub
+
+   
+    Private Sub frmQuiz_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class

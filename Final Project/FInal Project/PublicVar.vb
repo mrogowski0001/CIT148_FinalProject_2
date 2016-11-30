@@ -12,7 +12,7 @@
     Public cq As Integer
 
     'All arrays are ReDimed on frmQuiz_Load to calculate the array sizes when the variable arraySize is calculated after the QuizdataSet is populated
-    Public allQuestions() As String                         'logs each question for use in the summary form
+    Public allQuestions() As String                        'logs each question for use in the summary form
     Public gradedAnswers() As String                        'Variable to hold "correct" and "incorrect answers
     Public gradedAnswersTemp As String
     Public answerChecked() As Boolean                       'Variable to hold status of checked(graded) answers

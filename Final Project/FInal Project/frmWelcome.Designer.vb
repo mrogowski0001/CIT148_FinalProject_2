@@ -85,6 +85,7 @@ Partial Class frmWelcome
         Me.Controls.Add(Me.lblInstructionsText)
         Me.Controls.Add(Me.lblWelcomeText)
         Me.Controls.Add(Me.btnBegin)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.Name = "frmWelcome"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Welcome to the Quiz"
