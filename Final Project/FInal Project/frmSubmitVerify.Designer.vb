@@ -76,6 +76,7 @@ Partial Class frmSubmitVerify
         Me.Controls.Add(Me.btnSubmit)
         Me.Controls.Add(Me.lblWarnText)
         Me.Controls.Add(Me.lblWarning)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.Name = "frmSubmitVerify"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "WARNING!"

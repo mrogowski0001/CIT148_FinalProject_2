@@ -2,7 +2,7 @@
 
     'Declare variables for welcome text and quizForm
     Dim counter As Integer = 0
-    Dim welcomeText() As String = IO.File.ReadAllLines("WelcomeText.txt")
+    Dim welcomeText() As String = IO.File.ReadAllLines("Data\WelcomeText.txt")
 
 
     Private Sub btnBegin_Click() Handles btnBegin.Click

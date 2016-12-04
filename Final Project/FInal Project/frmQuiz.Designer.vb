@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmQuiz
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class frmQuiz
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.btnSubmit = New System.Windows.Forms.Button()
@@ -36,6 +36,10 @@ Partial Class frmQuiz
         Me.lblIncorrectAnswers = New System.Windows.Forms.Label()
         Me.lblCorrectAnswers = New System.Windows.Forms.Label()
         Me.grpCheck = New System.Windows.Forms.GroupBox()
+        Me.lblAns8_1 = New System.Windows.Forms.Label()
+        Me.chkAns8 = New System.Windows.Forms.CheckBox()
+        Me.lblAns7_1 = New System.Windows.Forms.Label()
+        Me.chkAns7 = New System.Windows.Forms.CheckBox()
         Me.lblAns1_1 = New System.Windows.Forms.Label()
         Me.lblAns5_1 = New System.Windows.Forms.Label()
         Me.lblAns6_1 = New System.Windows.Forms.Label()
@@ -48,14 +52,15 @@ Partial Class frmQuiz
         Me.chkAns5 = New System.Windows.Forms.CheckBox()
         Me.chkAns6 = New System.Windows.Forms.CheckBox()
         Me.chkAns3 = New System.Windows.Forms.CheckBox()
-        Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
-        Me.QuizDataSet = New FInal_Project.QuizDataSet()
         Me.txtTimeLeft = New System.Windows.Forms.TextBox()
         Me.lblQuestion = New System.Windows.Forms.Label()
-        Me.QuestionsTableAdapter = New FInal_Project.QuizDataSetTableAdapters.QuestionsTableAdapter()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.grpRadio = New System.Windows.Forms.GroupBox()
+        Me.lblAns8 = New System.Windows.Forms.Label()
+        Me.lblAns7 = New System.Windows.Forms.Label()
+        Me.radAns8 = New System.Windows.Forms.RadioButton()
+        Me.radAns7 = New System.Windows.Forms.RadioButton()
         Me.lblAns1 = New System.Windows.Forms.Label()
         Me.lblAns5 = New System.Windows.Forms.Label()
         Me.lblAns6 = New System.Windows.Forms.Label()
@@ -68,19 +73,28 @@ Partial Class frmQuiz
         Me.radAns4 = New System.Windows.Forms.RadioButton()
         Me.radAns5 = New System.Windows.Forms.RadioButton()
         Me.radAns2 = New System.Windows.Forms.RadioButton()
+        Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.QuizDataSet = New FInal_Project.QuizDataSet()
+        Me.grpNav = New System.Windows.Forms.GroupBox()
+        Me.grpControl = New System.Windows.Forms.GroupBox()
+        Me.btnNewQuiz = New System.Windows.Forms.Button()
+        Me.QuestionsTableAdapter = New FInal_Project.QuizDataSetTableAdapters.QuestionsTableAdapter()
+        Me.txtIncorrectCount = New System.Windows.Forms.TextBox()
         Me.grpCheckedAnswers.SuspendLayout()
         Me.grpCheck.SuspendLayout()
-        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.QuizDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.grpRadio.SuspendLayout()
+        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.QuizDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.grpNav.SuspendLayout()
+        Me.grpControl.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnSubmit
         '
         Me.btnSubmit.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnSubmit.Location = New System.Drawing.Point(627, 532)
+        Me.btnSubmit.Location = New System.Drawing.Point(114, 19)
         Me.btnSubmit.Name = "btnSubmit"
         Me.btnSubmit.Size = New System.Drawing.Size(101, 23)
         Me.btnSubmit.TabIndex = 2
@@ -90,7 +104,7 @@ Partial Class frmQuiz
         'btnExit
         '
         Me.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnExit.Location = New System.Drawing.Point(734, 532)
+        Me.btnExit.Location = New System.Drawing.Point(369, 19)
         Me.btnExit.Name = "btnExit"
         Me.btnExit.Size = New System.Drawing.Size(101, 23)
         Me.btnExit.TabIndex = 3
@@ -108,7 +122,7 @@ Partial Class frmQuiz
         'btnNext
         '
         Me.btnNext.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnNext.Location = New System.Drawing.Point(119, 538)
+        Me.btnNext.Location = New System.Drawing.Point(126, 19)
         Me.btnNext.Name = "btnNext"
         Me.btnNext.Size = New System.Drawing.Size(101, 23)
         Me.btnNext.TabIndex = 0
@@ -126,6 +140,7 @@ Partial Class frmQuiz
         Me.lblTimeRemaining.Size = New System.Drawing.Size(72, 13)
         Me.lblTimeRemaining.TabIndex = 22
         Me.lblTimeRemaining.Text = "Time Remain:"
+        Me.lblTimeRemaining.Visible = False
         '
         'Timer2
         '
@@ -133,7 +148,7 @@ Partial Class frmQuiz
         'btnPrevious
         '
         Me.btnPrevious.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnPrevious.Location = New System.Drawing.Point(12, 538)
+        Me.btnPrevious.Location = New System.Drawing.Point(6, 19)
         Me.btnPrevious.Name = "btnPrevious"
         Me.btnPrevious.Size = New System.Drawing.Size(101, 23)
         Me.btnPrevious.TabIndex = 24
@@ -143,7 +158,7 @@ Partial Class frmQuiz
         'btnCheckAnswer
         '
         Me.btnCheckAnswer.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCheckAnswer.Location = New System.Drawing.Point(519, 532)
+        Me.btnCheckAnswer.Location = New System.Drawing.Point(6, 19)
         Me.btnCheckAnswer.Name = "btnCheckAnswer"
         Me.btnCheckAnswer.Size = New System.Drawing.Size(102, 23)
         Me.btnCheckAnswer.TabIndex = 1
@@ -154,9 +169,9 @@ Partial Class frmQuiz
         '
         Me.grpCheckedAnswers.Controls.Add(Me.lblIncorrectAnswers)
         Me.grpCheckedAnswers.Controls.Add(Me.lblCorrectAnswers)
-        Me.grpCheckedAnswers.Location = New System.Drawing.Point(9, 567)
+        Me.grpCheckedAnswers.Location = New System.Drawing.Point(857, 51)
         Me.grpCheckedAnswers.Name = "grpCheckedAnswers"
-        Me.grpCheckedAnswers.Size = New System.Drawing.Size(826, 46)
+        Me.grpCheckedAnswers.Size = New System.Drawing.Size(141, 107)
         Me.grpCheckedAnswers.TabIndex = 32
         Me.grpCheckedAnswers.TabStop = False
         Me.grpCheckedAnswers.Text = "Checked Answers"
@@ -164,7 +179,7 @@ Partial Class frmQuiz
         'lblIncorrectAnswers
         '
         Me.lblIncorrectAnswers.AutoSize = True
-        Me.lblIncorrectAnswers.Location = New System.Drawing.Point(707, 21)
+        Me.lblIncorrectAnswers.Location = New System.Drawing.Point(6, 70)
         Me.lblIncorrectAnswers.Name = "lblIncorrectAnswers"
         Me.lblIncorrectAnswers.Size = New System.Drawing.Size(95, 13)
         Me.lblIncorrectAnswers.TabIndex = 2
@@ -173,7 +188,7 @@ Partial Class frmQuiz
         'lblCorrectAnswers
         '
         Me.lblCorrectAnswers.AutoSize = True
-        Me.lblCorrectAnswers.Location = New System.Drawing.Point(7, 21)
+        Me.lblCorrectAnswers.Location = New System.Drawing.Point(6, 34)
         Me.lblCorrectAnswers.Name = "lblCorrectAnswers"
         Me.lblCorrectAnswers.Size = New System.Drawing.Size(87, 13)
         Me.lblCorrectAnswers.TabIndex = 0
@@ -182,6 +197,10 @@ Partial Class frmQuiz
         'grpCheck
         '
         Me.grpCheck.BackColor = System.Drawing.Color.Transparent
+        Me.grpCheck.Controls.Add(Me.lblAns8_1)
+        Me.grpCheck.Controls.Add(Me.chkAns8)
+        Me.grpCheck.Controls.Add(Me.lblAns7_1)
+        Me.grpCheck.Controls.Add(Me.chkAns7)
         Me.grpCheck.Controls.Add(Me.lblAns1_1)
         Me.grpCheck.Controls.Add(Me.lblAns5_1)
         Me.grpCheck.Controls.Add(Me.lblAns6_1)
@@ -194,13 +213,55 @@ Partial Class frmQuiz
         Me.grpCheck.Controls.Add(Me.chkAns5)
         Me.grpCheck.Controls.Add(Me.chkAns6)
         Me.grpCheck.Controls.Add(Me.chkAns3)
-        Me.grpCheck.Location = New System.Drawing.Point(5, 12)
+        Me.grpCheck.Location = New System.Drawing.Point(1, 12)
         Me.grpCheck.Name = "grpCheck"
-        Me.grpCheck.Size = New System.Drawing.Size(813, 330)
+        Me.grpCheck.Size = New System.Drawing.Size(824, 435)
         Me.grpCheck.TabIndex = 40
         Me.grpCheck.TabStop = False
         Me.grpCheck.Text = "Select the correct answers below:"
         Me.grpCheck.Visible = False
+        '
+        'lblAns8_1
+        '
+        Me.lblAns8_1.AutoSize = True
+        Me.lblAns8_1.Location = New System.Drawing.Point(14, 383)
+        Me.lblAns8_1.Name = "lblAns8_1"
+        Me.lblAns8_1.Size = New System.Drawing.Size(16, 13)
+        Me.lblAns8_1.TabIndex = 44
+        Me.lblAns8_1.Text = "8."
+        '
+        'chkAns8
+        '
+        Me.chkAns8.CheckAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.chkAns8.Location = New System.Drawing.Point(36, 381)
+        Me.chkAns8.Name = "chkAns8"
+        Me.chkAns8.Size = New System.Drawing.Size(632, 48)
+        Me.chkAns8.TabIndex = 43
+        Me.chkAns8.Text = "chkAns8"
+        Me.chkAns8.TextAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.chkAns8.UseVisualStyleBackColor = True
+        Me.chkAns8.Visible = False
+        '
+        'lblAns7_1
+        '
+        Me.lblAns7_1.AutoSize = True
+        Me.lblAns7_1.Location = New System.Drawing.Point(14, 329)
+        Me.lblAns7_1.Name = "lblAns7_1"
+        Me.lblAns7_1.Size = New System.Drawing.Size(16, 13)
+        Me.lblAns7_1.TabIndex = 42
+        Me.lblAns7_1.Text = "7."
+        '
+        'chkAns7
+        '
+        Me.chkAns7.CheckAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.chkAns7.Location = New System.Drawing.Point(36, 327)
+        Me.chkAns7.Name = "chkAns7"
+        Me.chkAns7.Size = New System.Drawing.Size(632, 48)
+        Me.chkAns7.TabIndex = 41
+        Me.chkAns7.Text = "chkAns7"
+        Me.chkAns7.TextAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.chkAns7.UseVisualStyleBackColor = True
+        Me.chkAns7.Visible = False
         '
         'lblAns1_1
         '
@@ -329,16 +390,6 @@ Partial Class frmQuiz
         Me.chkAns3.UseVisualStyleBackColor = True
         Me.chkAns3.Visible = False
         '
-        'BindingSource1
-        '
-        Me.BindingSource1.DataMember = "Questions"
-        Me.BindingSource1.DataSource = Me.QuizDataSet
-        '
-        'QuizDataSet
-        '
-        Me.QuizDataSet.DataSetName = "QuizDataSet"
-        Me.QuizDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
         'txtTimeLeft
         '
         Me.txtTimeLeft.BackColor = System.Drawing.SystemColors.Control
@@ -347,22 +398,21 @@ Partial Class frmQuiz
         Me.txtTimeLeft.Name = "txtTimeLeft"
         Me.txtTimeLeft.Size = New System.Drawing.Size(59, 13)
         Me.txtTimeLeft.TabIndex = 23
+        Me.txtTimeLeft.Visible = False
         '
         'lblQuestion
         '
         Me.lblQuestion.AutoSize = True
+        Me.lblQuestion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblQuestion.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblQuestion.Location = New System.Drawing.Point(3, 5)
-        Me.lblQuestion.MaximumSize = New System.Drawing.Size(984, 178)
+        Me.lblQuestion.MaximumSize = New System.Drawing.Size(824, 178)
+        Me.lblQuestion.MinimumSize = New System.Drawing.Size(824, 16)
         Me.lblQuestion.Name = "lblQuestion"
-        Me.lblQuestion.Size = New System.Drawing.Size(55, 17)
+        Me.lblQuestion.Size = New System.Drawing.Size(824, 20)
         Me.lblQuestion.TabIndex = 58
         Me.lblQuestion.Text = "Questions"
         Me.lblQuestion.UseCompatibleTextRendering = True
-        '
-        'QuestionsTableAdapter
-        '
-        Me.QuestionsTableAdapter.ClearBeforeFill = True
         '
         'TableLayoutPanel1
         '
@@ -379,21 +429,25 @@ Partial Class frmQuiz
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(834, 475)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(837, 577)
         Me.TableLayoutPanel1.TabIndex = 59
         '
         'Panel1
         '
-        Me.Panel1.Controls.Add(Me.grpCheck)
         Me.Panel1.Controls.Add(Me.grpRadio)
-        Me.Panel1.Location = New System.Drawing.Point(3, 25)
+        Me.Panel1.Controls.Add(Me.grpCheck)
+        Me.Panel1.Location = New System.Drawing.Point(3, 28)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(828, 403)
+        Me.Panel1.Size = New System.Drawing.Size(834, 549)
         Me.Panel1.TabIndex = 60
         '
         'grpRadio
         '
         Me.grpRadio.BackColor = System.Drawing.Color.Transparent
+        Me.grpRadio.Controls.Add(Me.lblAns8)
+        Me.grpRadio.Controls.Add(Me.lblAns7)
+        Me.grpRadio.Controls.Add(Me.radAns8)
+        Me.grpRadio.Controls.Add(Me.radAns7)
         Me.grpRadio.Controls.Add(Me.lblAns1)
         Me.grpRadio.Controls.Add(Me.lblAns5)
         Me.grpRadio.Controls.Add(Me.lblAns6)
@@ -407,13 +461,59 @@ Partial Class frmQuiz
         Me.grpRadio.Controls.Add(Me.radAns5)
         Me.grpRadio.Controls.Add(Me.radAns2)
         Me.grpRadio.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.grpRadio.Location = New System.Drawing.Point(5, 12)
+        Me.grpRadio.Location = New System.Drawing.Point(1, 12)
         Me.grpRadio.Name = "grpRadio"
         Me.grpRadio.Padding = New System.Windows.Forms.Padding(10)
-        Me.grpRadio.Size = New System.Drawing.Size(813, 330)
+        Me.grpRadio.Size = New System.Drawing.Size(824, 435)
         Me.grpRadio.TabIndex = 13
         Me.grpRadio.TabStop = False
         Me.grpRadio.Text = "Select the correct answer below:"
+        '
+        'lblAns8
+        '
+        Me.lblAns8.AutoSize = True
+        Me.lblAns8.Location = New System.Drawing.Point(15, 383)
+        Me.lblAns8.Name = "lblAns8"
+        Me.lblAns8.Size = New System.Drawing.Size(16, 13)
+        Me.lblAns8.TabIndex = 38
+        Me.lblAns8.Text = "8."
+        '
+        'lblAns7
+        '
+        Me.lblAns7.AutoSize = True
+        Me.lblAns7.Location = New System.Drawing.Point(15, 329)
+        Me.lblAns7.Name = "lblAns7"
+        Me.lblAns7.Size = New System.Drawing.Size(16, 13)
+        Me.lblAns7.TabIndex = 37
+        Me.lblAns7.Text = "7."
+        '
+        'radAns8
+        '
+        Me.radAns8.CheckAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.radAns8.Location = New System.Drawing.Point(37, 381)
+        Me.radAns8.Name = "radAns8"
+        Me.radAns8.Size = New System.Drawing.Size(632, 48)
+        Me.radAns8.TabIndex = 36
+        Me.radAns8.TabStop = True
+        Me.radAns8.Text = "radAns8"
+        Me.radAns8.TextAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.radAns8.UseCompatibleTextRendering = True
+        Me.radAns8.UseVisualStyleBackColor = False
+        Me.radAns8.Visible = False
+        '
+        'radAns7
+        '
+        Me.radAns7.CheckAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.radAns7.Location = New System.Drawing.Point(37, 327)
+        Me.radAns7.Name = "radAns7"
+        Me.radAns7.Size = New System.Drawing.Size(632, 48)
+        Me.radAns7.TabIndex = 35
+        Me.radAns7.TabStop = True
+        Me.radAns7.Text = "radAns7"
+        Me.radAns7.TextAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.radAns7.UseCompatibleTextRendering = True
+        Me.radAns7.UseVisualStyleBackColor = False
+        Me.radAns7.Visible = False
         '
         'lblAns1
         '
@@ -549,21 +649,75 @@ Partial Class frmQuiz
         Me.radAns2.UseVisualStyleBackColor = True
         Me.radAns2.Visible = False
         '
+        'BindingSource1
+        '
+        Me.BindingSource1.DataMember = "Questions"
+        Me.BindingSource1.DataSource = Me.QuizDataSet
+        '
+        'QuizDataSet
+        '
+        Me.QuizDataSet.DataSetName = "QuizDataSet"
+        Me.QuizDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
+        'grpNav
+        '
+        Me.grpNav.Controls.Add(Me.btnPrevious)
+        Me.grpNav.Controls.Add(Me.btnNext)
+        Me.grpNav.Location = New System.Drawing.Point(14, 634)
+        Me.grpNav.Name = "grpNav"
+        Me.grpNav.Size = New System.Drawing.Size(233, 52)
+        Me.grpNav.TabIndex = 63
+        Me.grpNav.TabStop = False
+        Me.grpNav.Text = "Quiz Navigation:"
+        '
+        'grpControl
+        '
+        Me.grpControl.Controls.Add(Me.btnNewQuiz)
+        Me.grpControl.Controls.Add(Me.btnCheckAnswer)
+        Me.grpControl.Controls.Add(Me.btnExit)
+        Me.grpControl.Controls.Add(Me.btnSubmit)
+        Me.grpControl.Location = New System.Drawing.Point(365, 634)
+        Me.grpControl.Name = "grpControl"
+        Me.grpControl.Size = New System.Drawing.Size(476, 52)
+        Me.grpControl.TabIndex = 64
+        Me.grpControl.TabStop = False
+        Me.grpControl.Text = "Quiz Control:"
+        '
+        'btnNewQuiz
+        '
+        Me.btnNewQuiz.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Me.btnNewQuiz.Location = New System.Drawing.Point(261, 19)
+        Me.btnNewQuiz.Name = "btnNewQuiz"
+        Me.btnNewQuiz.Size = New System.Drawing.Size(102, 23)
+        Me.btnNewQuiz.TabIndex = 4
+        Me.btnNewQuiz.Text = "New Quiz"
+        Me.btnNewQuiz.UseVisualStyleBackColor = True
+        '
+        'QuestionsTableAdapter
+        '
+        Me.QuestionsTableAdapter.ClearBeforeFill = True
+        '
+        'txtIncorrectCount
+        '
+        Me.txtIncorrectCount.Location = New System.Drawing.Point(866, 13)
+        Me.txtIncorrectCount.Name = "txtIncorrectCount"
+        Me.txtIncorrectCount.Size = New System.Drawing.Size(100, 20)
+        Me.txtIncorrectCount.TabIndex = 65
+        Me.txtIncorrectCount.Visible = False
+        '
         'frmQuiz
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(976, 619)
+        Me.ClientSize = New System.Drawing.Size(1008, 691)
         Me.ControlBox = False
+        Me.Controls.Add(Me.txtIncorrectCount)
+        Me.Controls.Add(Me.grpControl)
+        Me.Controls.Add(Me.grpNav)
         Me.Controls.Add(Me.grpCheckedAnswers)
-        Me.Controls.Add(Me.btnCheckAnswer)
-        Me.Controls.Add(Me.btnPrevious)
         Me.Controls.Add(Me.txtTimeLeft)
         Me.Controls.Add(Me.lblTimeRemaining)
-        Me.Controls.Add(Me.btnSubmit)
-        Me.Controls.Add(Me.btnExit)
         Me.Controls.Add(Me.lblTitle)
-        Me.Controls.Add(Me.btnNext)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.Name = "frmQuiz"
@@ -573,13 +727,15 @@ Partial Class frmQuiz
         Me.grpCheckedAnswers.PerformLayout()
         Me.grpCheck.ResumeLayout(False)
         Me.grpCheck.PerformLayout()
-        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.QuizDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.TableLayoutPanel1.PerformLayout()
         Me.Panel1.ResumeLayout(False)
         Me.grpRadio.ResumeLayout(False)
         Me.grpRadio.PerformLayout()
+        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.QuizDataSet, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.grpNav.ResumeLayout(False)
+        Me.grpControl.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -600,8 +756,6 @@ Partial Class frmQuiz
     Friend WithEvents BindingSource1 As System.Windows.Forms.BindingSource
     Friend WithEvents txtTimeLeft As System.Windows.Forms.TextBox
     Friend WithEvents lblQuestion As System.Windows.Forms.Label
-    Friend WithEvents QuizDataSet As FInal_Project.QuizDataSet
-    Friend WithEvents QuestionsTableAdapter As FInal_Project.QuizDataSetTableAdapters.QuestionsTableAdapter
     Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents grpRadio As System.Windows.Forms.GroupBox
     Friend WithEvents lblAns1 As System.Windows.Forms.Label
@@ -629,4 +783,18 @@ Partial Class frmQuiz
     Friend WithEvents lblAns2_1 As System.Windows.Forms.Label
     Friend WithEvents lblAns4_1 As System.Windows.Forms.Label
     Friend WithEvents lblAns3_1 As System.Windows.Forms.Label
+    Friend WithEvents radAns7 As System.Windows.Forms.RadioButton
+    Friend WithEvents lblAns8_1 As System.Windows.Forms.Label
+    Friend WithEvents chkAns8 As System.Windows.Forms.CheckBox
+    Friend WithEvents lblAns7_1 As System.Windows.Forms.Label
+    Friend WithEvents chkAns7 As System.Windows.Forms.CheckBox
+    Friend WithEvents lblAns8 As System.Windows.Forms.Label
+    Friend WithEvents lblAns7 As System.Windows.Forms.Label
+    Friend WithEvents radAns8 As System.Windows.Forms.RadioButton
+    Friend WithEvents grpNav As System.Windows.Forms.GroupBox
+    Friend WithEvents grpControl As System.Windows.Forms.GroupBox
+    Friend WithEvents btnNewQuiz As System.Windows.Forms.Button
+    Friend WithEvents QuizDataSet As FInal_Project.QuizDataSet
+    Friend WithEvents QuestionsTableAdapter As FInal_Project.QuizDataSetTableAdapters.QuestionsTableAdapter
+    Friend WithEvents txtIncorrectCount As System.Windows.Forms.TextBox
 End Class

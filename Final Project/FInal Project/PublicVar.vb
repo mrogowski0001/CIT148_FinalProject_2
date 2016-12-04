@@ -17,28 +17,30 @@
     Public gradedAnswersTemp As String
     Public answerChecked() As Boolean                       'Variable to hold status of checked(graded) answers
     Public questionsAnswered() As Integer                   'Keeps a count of all answered questions to determine if there are any unanswered question qhwn the user submits the quiz
-
+    Public incorrectCount As Integer
+    Public incorrectOnly As Boolean = False
+    Public incorrectAmount As Integer = 1
 
     Public multiSelect As Boolean
     Public numAnswers As Integer
-    'Public answerOrder() As Integer = {1, 2, 3, 4, 5, 6}
-    'The rad*Check arrays hold the status of the radio buttons and check boxes for each question during the quiz
     Public rad1Check() As Boolean
     Public rad2Check() As Boolean
     Public rad3Check() As Boolean
     Public rad4Check() As Boolean
     Public rad5Check() As Boolean
     Public rad6Check() As Boolean
-    Public radCheckTemp(5) As Boolean
+    Public rad7Check() As Boolean
+    Public rad8Check() As Boolean
+    Public radCheckTemp(7) As Boolean
 
-    Public answerKey(5) As String
+    Public answerKey(7) As String
     Public answerKeyString As String
 
-    Public currentAnswersTemp(5) As String
-    Public currentAnswers(5) As String
-    Public correctAnswer(5) As String
-    Public selectedAnswers(5) As String
-    Public selectedAnswers2(5) As String
+    Public currentAnswersTemp(7) As String
+    Public currentAnswers(7) As String
+    Public correctAnswer(7) As String
+    Public selectedAnswers(7) As String
+    Public selectedAnswers2(7) As String
     Public selectedAnswersString() As String
 
     'Declare varialbes to be used for the quiz
@@ -57,6 +59,11 @@
     Public checkedCorrectCount As Integer = 0               'Total of correct answers that have been checked
     Public checkedInorrectCount As Integer = 0              'Total of incorrect answers that have been checked
 
+    Public timerEnabled As Boolean = False
+    Public timePerQuestion As Integer = 60
+
+    Public currentAnswerCount As Integer
+    Public randomQuestions As Boolean = False
 
     'Function to calculate the average based on the total questions in the questions text file
     Public Function AverageScore(totalCorrect As Integer, totalQuestions As Integer) As Double

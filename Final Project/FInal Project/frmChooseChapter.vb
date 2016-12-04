@@ -1,12 +1,14 @@
 ﻿Public Class frmChooseChapter
     Dim addCount As Integer = 0
     Dim currentChapter As String
+    
 
     Private Sub frmChooseChapter_Load() Handles MyBase.Load
         'TODO: This line of code loads data into the 'QuizDataSet.Questions' table. You can move, or remove it, as needed.
         Me.QuestionsTableAdapter.Fill(Me.QuizDataSet.Questions)
-        'TODO: This line of code loads data into the 'QuizDataSet.Questions' table. You can move, or remove it, as needed.
-        Me.QuestionsTableAdapter.Fill(Me.QuizDataSet.Questions)
+
+
+
 
         'Set the text for the instructions label
         lblInstruction.Text = "To add a chapter, select the chapter on the left and click 'Add Selected to Quiz'." & Environment.NewLine & "To all add all chapters, click 'Add all to Quiz'." & Environment.NewLine & "To remove a chapter, select the chapter in the right list and click 'Remove from Quiz'." & Environment.NewLine & "To remove all items from the quiz, click 'Remove all from Quiz'."
@@ -27,14 +29,26 @@
     End Function
     'Query the chapter text and fill the chapters array
     Private Sub QueryChapters()
+        If incorrectOnly = False Then
+            Dim query = From chap In QuizDataSet.Questions
+                        Order By chap.chapter
+                           Select chap.chapter Distinct
 
-        Dim query = From chap In QuizDataSet.Questions
-                    Order By chap.chapter
-                       Select chap.chapter Distinct
+            lstChapters.Items.Clear()
+            For Each Chap As String In query
+                lstChapters.Items.Add(Chap)
+            Next
+        Else
+            Dim query2 = From chap In QuizDataSet.Questions
+                        Where chap.IncorrectCount >= incorrectAmount
+                        Order By chap.chapter
+                        Select chap.chapter Distinct
 
-        For Each Chap As String In query
-            lstChapters.Items.Add(Chap)
-        Next
+            lstChapters.Items.Clear()
+            For Each Chap2 As String In query2
+                lstChapters.Items.Add(Chap2)
+            Next
+        End If
 
     End Sub
 
@@ -127,4 +141,47 @@
         btnStart.Enabled = False
     End Sub
 
+    Private Sub chkIncorrectOnly_CheckedChanged() Handles chkIncorrectOnly.CheckedChanged
+        If chkIncorrectOnly.Checked = True Then
+            incorrectOnly = True
+            NumericUpDown1.Enabled = True
+        Else
+            incorrectOnly = False
+            NumericUpDown1.Enabled = False
+        End If
+        incorrectAmount = CInt(NumericUpDown1.Text)
+        QueryChapters()
+
+    End Sub
+
+    Private Sub NumericUpDown1_TextChanged() Handles NumericUpDown1.TextChanged
+        incorrectAmount = CInt(NumericUpDown1.Text)
+        QueryChapters()
+    End Sub
+
+    Private Sub chkTimerEnable_CheckedChanged() Handles chkTimerEnable.CheckedChanged
+        If chkTimerEnable.Checked = True Then
+            timerEnabled = True
+            NumericUpDown2.Enabled = True
+        Else
+            timerEnabled = False
+            NumericUpDown2.Enabled = False
+        End If
+    End Sub
+
+    Private Sub NumericUpDown2_TextChanged() Handles NumericUpDown2.TextChanged
+        timePerQuestion = CInt(NumericUpDown2.Text)
+    End Sub
+
+    Private Sub chkRandomQuestions_CheckedChanged() Handles chkRandomQuestions.CheckedChanged
+        If chkRandomQuestions.Checked = True Then
+            randomQuestions = True
+        Else
+            randomQuestions = False
+        End If
+    End Sub
+
+    Private Sub BtnExit_Click() Handles BtnExit.Click
+        frmExit.Show()
+    End Sub
 End Class

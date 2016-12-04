@@ -1,6 +1,13 @@
-﻿Public Class frmQuiz
-    
+﻿Imports System.Data.OleDb
+Public Class frmQuiz
+    Dim provider As String
+    Dim dataFile As String
+    Dim connString As String
+    Dim myConnection As OleDbConnection = New OleDbConnection
+
     Private Sub frmQuiz_Load() Handles MyBase.Load
+        'TODO: This line of code loads data into the 'QuizDataSet.Questions' table. You can move, or remove it, as needed.
+        Me.QuestionsTableAdapter.Fill(Me.QuizDataSet.Questions)
         'TODO: This line of code loads data into the 'QuizDataSet.Questions' table. You can move, or remove it, as needed.
         Me.QuestionsTableAdapter.Fill(Me.QuizDataSet.Questions)
 
@@ -8,7 +15,7 @@
         totalQuestions = QueryNumQuestion()
 
         'Set the time limit for the quiz
-        timeLeft = (totalQuestions * 60)                    'Set time to 60 secones per question
+        timeLeft = (totalQuestions * timePerQuestion)                    'Set time to 60 secones per question
         arraySize = (totalQuestions - 1)                    'Set the size of the arrays based on total number of questions
 
         'ReDim arrays to resize them to the total number of questions
@@ -22,6 +29,8 @@
         ReDim rad4Check(arraySize)
         ReDim rad5Check(arraySize)
         ReDim rad6Check(arraySize)
+        ReDim rad7Check(arraySize)
+        ReDim rad8Check(arraySize)
         ReDim qIDNums(arraySize)
         ReDim selectedAnswersString(arraySize)
 
@@ -59,11 +68,20 @@
             questionsAnswered(i) = 0
         Next
 
-        btnPrevious.Enabled = False 'Set the back button to disabled because this is the first question
-        Timer1.Interval = 1000      'Set the time interval of the countdown timer to 1000 milliseconds.
-        Timer1.Enabled = True       'Enable the countdown timer to start counting down when the quiz begns.
-        Timer2.Interval = 500       'Set the blink timer to 500 milliseconds (1/2 second) so the countdown timer will blink on and off every second.
-        Timer2.Enabled = False      'Disable timer 2, this timer will be enabled in timer 1 when the countdown reaches 60 seconds.
+        btnPrevious.Enabled = False             'Set the back button to disabled because this is the first question
+        Timer1.Interval = 1000                  'Set the time interval of the countdown timer to 1000 milliseconds.
+        Timer1.Enabled = timerEnabled           'Enable the countdown timer to start counting down when the quiz begns.
+        Timer2.Interval = 500                   'Set the blink timer to 500 milliseconds (1/2 second) so the countdown timer will blink on and off every second.
+        Timer2.Enabled = timerEnabled           'Disable timer 2, this timer will be enabled in timer 1 when the countdown reaches 60 seconds.
+
+        If timerEnabled = True Then
+            lblTimeRemaining.Visible = True
+            txtTimeLeft.Visible = True
+        Else
+            lblTimeRemaining.Visible = False
+            txtTimeLeft.Visible = False
+        End If
+        Randomize_Questions()
 
         'Sets the title based on the first question 
         lblTitle.Text = ("Question " & position & " of " & totalQuestions & ":")
@@ -73,59 +91,41 @@
         cq = qIDNums(position - 1)
 
         'Dim testText As String = "Windows Deployment Services (WDS) is a software platform and technology that allows you to perform which function?"
-        lblQuestion.Text = allQuestions(position - 1)
+        lblQuestion.Text = QueryQuestion(cq)
 
         'Set all radio buttons and check boxes to stored values if applicable
         multiSelect = QueryMultiSelect(cq)
 
         'Set the visibility of grpBoxes based on the multiselect query
         If multiSelect = True Then
-            grpRadio.Text = "Select the correct answers below:"
-            radAns1.Visible = False
-            radAns2.Visible = False
-            radAns3.Visible = False
-            radAns4.Visible = False
-            radAns5.Visible = False
-            radAns6.Visible = False
-
-            chkAns1.Visible = True
-            chkAns2.Visible = True
-            chkAns3.Visible = True
-            chkAns4.Visible = True
-            chkAns5.Visible = True
-            chkAns6.Visible = True
+            grpRadio.Visible = False
+            grpCheck.Visible = True
         Else
-            grpRadio.Text = "Select the correct answer below:"
-            radAns1.Visible = True
-            radAns2.Visible = True
-            radAns3.Visible = True
-            radAns4.Visible = True
-            radAns5.Visible = True
-            radAns6.Visible = True
-
-            chkAns1.Visible = False
-            chkAns2.Visible = False
-            chkAns3.Visible = False
-            chkAns4.Visible = False
-            chkAns5.Visible = False
-            chkAns6.Visible = False
+            grpRadio.Visible = True
+            grpCheck.Visible = False
         End If
 
         'Sets the radio button answers text based on the first question 
         SetCurrentAnswers()
 
         'Sets the correct answer based on the current question
-        SetCorrectAnswer()
+
 
         'Sets the text if the Check Answer button is clicked. 
         CorrectAnswerTextQuery()
+        SetCorrectAnswer()
+
+
+
+        incorrectCount = QueryIncorrectCount(cq)
 
     End Sub
 
 
     Private Sub btnNext_Click() Handles btnNext.Click
+        WriteDB()
         'Clear the radCheckTemp array (used for Checkboxes) 
-        ReDim radCheckTemp(5)
+        ReDim radCheckTemp(7)
 
         'Temporarily store current radio button and check box status
         StoreCurrentValues()
@@ -146,14 +146,12 @@
         multiSelect = QueryMultiSelect(cq)
 
         'Set the visibility of grpBoxes based on the multiselect query
-        If multiSelect = False Then
-            grpRadio.Text = "Select the correct answers below:"
-            grpRadio.Visible = True
-            grpCheck.Visible = False
-        Else
-            grpRadio.Text = "Select the correct answer below:"
+        If multiSelect = True Then
             grpRadio.Visible = False
             grpCheck.Visible = True
+        Else
+            grpRadio.Visible = True
+            grpCheck.Visible = False
         End If
 
         'Disable the next button on the last question to prevent an error and ensure the back button is enabled.
@@ -167,7 +165,7 @@
         lblTitle.Text = ("Question " & position & " of " & totalQuestions & ":")
 
         'Sets the question text based on the current question  
-        lblQuestion.Text = allQuestions(position - 1)
+        lblQuestion.Text = QueryQuestion(cq)
 
         'Sets the radio button answers text based on the first question 
         SetCurrentAnswers()
@@ -196,10 +194,15 @@
             RestoreCheckBoxes()
         End If
 
+
+        incorrectCount = QueryIncorrectCount(cq)
+        txtIncorrectCount.Text = incorrectCount.ToString
+
     End Sub
 
     Private Sub btnPrevious_Click() Handles btnPrevious.Click
-        ReDim radCheckTemp(5)
+        WriteDB()
+        ReDim radCheckTemp(7)
 
         'Temporarily store current radio button and check box status
         StoreCurrentValues()
@@ -219,14 +222,12 @@
         multiSelect = QueryMultiSelect(cq)
 
         'Set the visibility of grpBoxes based on the multiselect query
-        If multiSelect = False Then
-            grpRadio.Text = "Select the correct answers below:"
-            grpRadio.Visible = True
-            grpCheck.Visible = False
-        Else
-            grpRadio.Text = "Select the correct answer below:"
+        If multiSelect = True Then
             grpRadio.Visible = False
             grpCheck.Visible = True
+        Else
+            grpRadio.Visible = True
+            grpCheck.Visible = False
         End If
 
         'Disable the previous question button if this is the first question
@@ -239,11 +240,11 @@
         'Set title text based on question number (position)
         lblTitle.Text = ("Question " & position & " of " & totalQuestions & ":")
 
-        lblQuestion.Text = allQuestions(position - 1)
+        lblQuestion.Text = QueryQuestion(cq)
 
         'Sets the radio button answers text based on the first question 
         SetCurrentAnswers()
-        'Label_ShowHide()
+
 
         'Sets the correct answer based on the current question
         SetCorrectAnswer()
@@ -268,6 +269,10 @@
         Else
             RestoreCheckBoxes()
         End If
+
+
+        incorrectCount = QueryIncorrectCount(cq)
+        txtIncorrectCount.Text = incorrectCount.ToString
 
     End Sub
 
@@ -320,6 +325,8 @@
         rad4Check(position - 1) = False
         rad5Check(position - 1) = False
         rad6Check(position - 1) = False
+        rad7Check(position - 1) = False
+        rad8Check(position - 1) = False
 
         'Set answer to correct or incorrect
         DetermineIfCorrect()
@@ -342,6 +349,8 @@
         rad4Check(position - 1) = False
         rad5Check(position - 1) = False
         rad6Check(position - 1) = False
+        rad7Check(position - 1) = False
+        rad8Check(position - 1) = False
 
         'Set answer to correct or incorrect
         DetermineIfCorrect()
@@ -364,6 +373,8 @@
         rad4Check(position - 1) = False
         rad5Check(position - 1) = False
         rad6Check(position - 1) = False
+        rad7Check(position - 1) = False
+        rad8Check(position - 1) = False
 
         'Set answer to correct or incorrect
         DetermineIfCorrect()
@@ -386,6 +397,8 @@
         rad4Check(position - 1) = True
         rad5Check(position - 1) = False
         rad6Check(position - 1) = False
+        rad7Check(position - 1) = False
+        rad8Check(position - 1) = False
 
         'Set answer to correct or incorrect
         DetermineIfCorrect()
@@ -408,6 +421,8 @@
         rad4Check(position - 1) = False
         rad5Check(position - 1) = True
         rad6Check(position - 1) = False
+        rad7Check(position - 1) = False
+        rad8Check(position - 1) = False
 
         'Set answer to correct or incorrect
         DetermineIfCorrect()
@@ -430,6 +445,57 @@
         rad4Check(position - 1) = False
         rad5Check(position - 1) = False
         rad6Check(position - 1) = True
+        rad7Check(position - 1) = False
+        rad8Check(position - 1) = False
+
+        'Set answer to correct or incorrect
+        DetermineIfCorrect()
+
+        'Give focus to the next button
+        btnNext.Focus()
+
+    End Sub
+
+    Private Sub radAns7_CheckedChanged() Handles radAns7.CheckedChanged
+        'If the radio button is selected then give focus to the  submit button
+        If questionsAnswered(position - 1) = 0 Then
+            questionsAnswered(position - 1) = 1
+        End If
+
+        'Set radio button 2 to true and all other radio buttons to false
+        rad1Check(position - 1) = False
+        rad2Check(position - 1) = False
+        rad3Check(position - 1) = False
+        rad4Check(position - 1) = False
+        rad5Check(position - 1) = False
+        rad6Check(position - 1) = False
+        rad7Check(position - 1) = True
+        rad8Check(position - 1) = False
+
+
+        'Set answer to correct or incorrect
+        DetermineIfCorrect()
+
+        'Give focus to the next button
+        btnNext.Focus()
+
+    End Sub
+
+    Private Sub radAns8_CheckedChanged() Handles radAns8.CheckedChanged
+        'If the radio button is selected then give focus to the  submit button
+        If questionsAnswered(position - 1) = 0 Then
+            questionsAnswered(position - 1) = 1
+        End If
+
+        'Set radio button 2 to true and all other radio buttons to false
+        rad1Check(position - 1) = False
+        rad2Check(position - 1) = False
+        rad3Check(position - 1) = False
+        rad4Check(position - 1) = False
+        rad5Check(position - 1) = False
+        rad6Check(position - 1) = False
+        rad7Check(position - 1) = False
+        rad8Check(position - 1) = True
 
         'Set answer to correct or incorrect
         DetermineIfCorrect()
@@ -465,6 +531,16 @@
     End Sub
 
     Private Sub radAns6_TextChanged() Handles radAns6.TextChanged
+        'If the text for the answer = "_" then hide the checnbox, radio button and number label
+        ShowHide_RadioAndChecks()
+    End Sub
+
+    Private Sub radAns7_TextChanged() Handles radAns7.TextChanged
+        'If the text for the answer = "_" then hide the checnbox, radio button and number label
+        ShowHide_RadioAndChecks()
+    End Sub
+
+    Private Sub radAns8_TextChanged() Handles radAns8.TextChanged
         'If the text for the answer = "_" then hide the checnbox, radio button and number label
         ShowHide_RadioAndChecks()
     End Sub
@@ -595,6 +671,48 @@
 
     End Sub
 
+    Private Sub chkAns7_CheckedChanged() Handles chkAns7.CheckedChanged
+        'Mark the selected question as answered.
+        If questionsAnswered(position - 1) = 0 Then
+            questionsAnswered(position - 1) = 1
+        End If
+
+        'Set radio button 1 to true and all other radio buttons to false
+        If rad7Check(position - 1) = True Then
+            rad7Check(position - 1) = False
+        Else
+            rad7Check(position - 1) = True
+        End If
+
+        'Set answer to correct or incorrect
+        DetermineIfCorrect()
+
+        'Give focus to the next button
+        btnNext.Focus()
+
+    End Sub
+
+    Private Sub chkAns8_CheckedChanged() Handles chkAns8.CheckedChanged
+        'Mark the selected question as answered.
+        If questionsAnswered(position - 1) = 0 Then
+            questionsAnswered(position - 1) = 1
+        End If
+
+        'Set radio button 1 to true and all other radio buttons to false
+        If rad8Check(position - 1) = True Then
+            rad8Check(position - 1) = False
+        Else
+            rad8Check(position - 1) = True
+        End If
+
+        'Set answer to correct or incorrect
+        DetermineIfCorrect()
+
+        'Give focus to the next button
+        btnNext.Focus()
+
+    End Sub
+
     Private Sub chkAns1_TextChanged() Handles chkAns1.TextChanged
         'If the text for the answer = "_" then hide the checnbox, radio button and number label
         ShowHide_RadioAndChecks()
@@ -621,6 +739,16 @@
     End Sub
 
     Private Sub chkAns6_TextChanged() Handles chkAns6.TextChanged
+        'If the text for the answer = "_" then hide the checnbox, radio button and number label
+        ShowHide_RadioAndChecks()
+    End Sub
+
+    Private Sub chkAns7_TextChanged() Handles chkAns7.TextChanged
+        'If the text for the answer = "_" then hide the checnbox, radio button and number label
+        ShowHide_RadioAndChecks()
+    End Sub
+
+    Private Sub chkAns8_TextChanged() Handles chkAns8.TextChanged
         'If the text for the answer = "_" then hide the checnbox, radio button and number label
         ShowHide_RadioAndChecks()
     End Sub
@@ -700,6 +828,20 @@
     End Sub
 
     'Query to determine if the answer has more than 1 correct answer, if so the check boxes will be displayed and not the radio buttons
+    Function QueryIncorrectCount(cq As Integer) As Integer
+
+        Dim result As Integer
+
+        Dim query = From q In QuizDataSet.Questions
+                              Where q.ID = cq
+                              Select q.IncorrectCount
+
+        result = query.First
+        Return result
+
+    End Function
+
+    'Query to determine if the answer has more than 1 correct answer, if so the check boxes will be displayed and not the radio buttons
     Function QueryMultiSelect(cq As Integer) As Boolean
 
         Dim result As Boolean
@@ -715,15 +857,27 @@
 
     'Query the total number of questions
     Function QueryNumQuestion() As Integer
-
         Dim result As Integer
-        For i As Integer = 0 To (numChapters - 1)
-            Dim query = From q In QuizDataSet.Questions
-                        Where q.chapter = chapters(i)
-                                  Select q.question
 
-            result += query.Count
-        Next
+        If incorrectOnly = False Then
+            For i As Integer = 0 To (numChapters - 1)
+                Dim query = From q In QuizDataSet.Questions
+                            Where q.chapter = chapters(i)
+                                      Select q.question
+
+                result += query.Count
+            Next
+
+        Else
+            For i As Integer = 0 To (numChapters - 1)
+                Dim query = From q In QuizDataSet.Questions
+                            Where q.chapter = chapters(i)
+                            Where q.IncorrectCount >= incorrectAmount
+                                      Select q.question
+
+                result += query.Count
+            Next
+        End If
         Return result
 
     End Function
@@ -734,26 +888,50 @@
         Dim chapterCount As Integer
         Dim arrayCount As Integer = 0
 
+        If incorrectOnly = False Then
+            For j As Integer = 0 To (numChapters - 1)
+                currentChapter = chapters(j)
 
-        For j As Integer = 0 To (numChapters - 1)
-            currentChapter = chapters(j)
+                Dim queryID = From q In QuizDataSet.Questions
+                                Where q.chapter = currentChapter
+                                Select q.ID
 
-            Dim queryID = From q In QuizDataSet.Questions
-                            Where q.chapter = currentChapter
-                            Select q.ID
-
-            chapterCount = queryID.Count
+                chapterCount = queryID.Count
 
 
-            For i As Integer = 0 To (chapterCount - 1)
-                Dim query2 = From q In QuizDataSet.Questions
-                             Where q.chapter = currentChapter
-                             Select q.ID
+                For i As Integer = 0 To (chapterCount - 1)
+                    Dim query2 = From q In QuizDataSet.Questions
+                                 Where q.chapter = currentChapter
+                                 Select q.ID
 
-                qIDNums(arrayCount) = query2(i)
-                arrayCount += 1
+                    qIDNums(arrayCount) = query2(i)
+                    arrayCount += 1
+                Next
             Next
-        Next
+        Else
+            For j As Integer = 0 To (numChapters - 1)
+                currentChapter = chapters(j)
+
+                Dim queryID = From q In QuizDataSet.Questions
+                                Where q.chapter = currentChapter
+                                Where q.IncorrectCount >= incorrectAmount
+                                Select q.ID
+
+                chapterCount = queryID.Count
+
+
+                For i As Integer = 0 To (chapterCount - 1)
+                    Dim query2 = From q In QuizDataSet.Questions
+                                 Where q.chapter = currentChapter
+                                 Where q.IncorrectCount >= incorrectAmount
+                                 Select q.ID
+
+                    qIDNums(arrayCount) = query2(i)
+                    arrayCount += 1
+                Next
+            Next
+
+        End If
 
     End Sub
 
@@ -821,6 +999,21 @@
             Dim query = From q In QuizDataSet.Questions
                               Where q.ID = cq
                               Select q.answer6
+
+            result = query.First
+
+        ElseIf querySelect = "7" Then
+            Dim query = From q In QuizDataSet.Questions
+                              Where q.ID = cq
+                              Select q.answer7
+
+            result = query.First
+
+
+        ElseIf querySelect = "8" Then
+            Dim query = From q In QuizDataSet.Questions
+                              Where q.ID = cq
+                              Select q.answer8
 
             result = query.First
         End If
@@ -939,6 +1132,40 @@
                 result = "_"
             End If
 
+        ElseIf querySelect = "7" Then
+            Dim query = From q In QuizDataSet.Questions
+                              Where q.ID = cq
+                              Select q.Answerkey7
+
+            queryResult = query.First
+
+            If queryResult = True Then
+                Dim query1 = From q In QuizDataSet.Questions
+                              Where q.ID = cq
+                              Select q.answer7
+
+                result = query1.First
+            Else
+                result = "_"
+            End If
+
+        ElseIf querySelect = "8" Then
+            Dim query = From q In QuizDataSet.Questions
+                              Where q.ID = cq
+                              Select q.Answerkey8
+
+            queryResult = query.First
+
+            If queryResult = True Then
+                Dim query1 = From q In QuizDataSet.Questions
+                              Where q.ID = cq
+                              Select q.answer8
+
+                result = query1.First
+            Else
+                result = "_"
+            End If
+
         End If
         Return result.ToString
 
@@ -995,16 +1222,63 @@
             selectedAnswers(5) = "x"
         End If
 
-        answerKeyString = answerKey(0) & answerKey(1) & answerKey(2) & answerKey(3) & answerKey(4) & answerKey(5)
-        selectedAnswersString(position - 1) = selectedAnswers(0) & selectedAnswers(1) & selectedAnswers(2) & selectedAnswers(3) & selectedAnswers(4) & selectedAnswers(5)
-
-        If answerKeyString = selectedAnswersString(position - 1) Then
-            gradedAnswers(position - 1) = "Correct"
+        If rad7Check(position - 1) = True Then
+            selectedAnswers(6) = chkAns7.Text
+        ElseIf rad7Check(position - 1) = False Then
+            selectedAnswers(6) = "_"
         Else
-            gradedAnswers(position - 1) = "Incorrect"
+            selectedAnswers(6) = "x"
         End If
 
+        If rad8Check(position - 1) = True Then
+            selectedAnswers(7) = chkAns8.Text
+        ElseIf rad8Check(position - 1) = False Then
+            selectedAnswers(7) = "_"
+        Else
+            selectedAnswers(7) = "x"
+        End If
 
+        answerKeyString = answerKey(0) & answerKey(1) & answerKey(2) & answerKey(3) & answerKey(4) & answerKey(5) & answerKey(6) & answerKey(7)
+        selectedAnswersString(position - 1) = selectedAnswers(0) & selectedAnswers(1) & selectedAnswers(2) & selectedAnswers(3) & selectedAnswers(4) & selectedAnswers(5) & selectedAnswers(6) & selectedAnswers(7)
+
+
+
+        If answerKeyString = selectedAnswersString(position - 1) Then
+
+            If gradedAnswers(position - 1) = "Incorrect" Then
+                incorrectCount -= 1
+                txtIncorrectCount.Text = incorrectCount.ToString
+            End If
+            gradedAnswers(position - 1) = "Correct"
+        Else
+            If gradedAnswers(position - 1) = "Correct" Or gradedAnswers(position - 1) = "N/A" Then
+                incorrectCount += 1
+                txtIncorrectCount.Text = incorrectCount.ToString
+            End If
+            gradedAnswers(position - 1) = "Incorrect"
+
+        End If
+
+    End Sub
+
+    Private Sub WriteDB()
+         provider = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source ="
+        dataFile = "Data\Quiz.accdb"
+        connString = provider & dataFile
+        myConnection.ConnectionString = connString
+        myConnection.Open()
+        Dim str As String
+        str = "update [Questions] set [IncorrectCount]  = '" & txtIncorrectCount.Text & "' Where [ID] = " & qIDNums(position - 1) & "  "
+        Dim cmd As OleDbCommand = New OleDbCommand(str, myConnection)
+        Try
+            cmd.ExecuteNonQuery()
+            cmd.Dispose()
+            myConnection.Close()
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+
+        Me.QuestionsTableAdapter.Fill(Me.QuizDataSet.Questions)
     End Sub
 
     'Stores the current values in the arrray for the radio buttons and check boxes. 
@@ -1018,6 +1292,8 @@
         radCheckTemp(3) = rad4Check(position - 1)
         radCheckTemp(4) = rad5Check(position - 1)
         radCheckTemp(5) = rad6Check(position - 1)
+        radCheckTemp(6) = rad7Check(position - 1)
+        radCheckTemp(7) = rad8Check(position - 1)
         gradedAnswersTemp = gradedAnswers(position - 1)
 
     End Sub
@@ -1030,6 +1306,8 @@
         radAns4.Checked = False
         radAns5.Checked = False
         radAns6.Checked = False
+        radAns7.Checked = False
+        radAns8.Checked = False
 
         chkAns1.Checked = False
         chkAns2.Checked = False
@@ -1037,6 +1315,8 @@
         chkAns4.Checked = False
         chkAns5.Checked = False
         chkAns6.Checked = False
+        chkAns7.Checked = False
+        chkAns8.Checked = False
 
     End Sub
 
@@ -1049,6 +1329,9 @@
         rad4Check(position - 1) = radCheckTemp(3)
         rad5Check(position - 1) = radCheckTemp(4)
         rad6Check(position - 1) = radCheckTemp(5)
+        rad7Check(position - 1) = radCheckTemp(6)
+        rad8Check(position - 1) = radCheckTemp(7)
+
         gradedAnswers(position - 1) = gradedAnswersTemp
     End Sub
 
@@ -1061,6 +1344,8 @@
         radAns4.Checked = rad4Check(position - 1)
         radAns5.Checked = rad5Check(position - 1)
         radAns6.Checked = rad6Check(position - 1)
+        radAns7.Checked = rad7Check(position - 1)
+        radAns8.Checked = rad8Check(position - 1)
     End Sub
 
     'Restore check boxes separtate from radio buttons because they work in a different way
@@ -1095,12 +1380,22 @@
             rad6Check(position - 1) = False
             chkAns6.Checked = True
         End If
+
+        If rad7Check(position - 1) = True Then
+            rad7Check(position - 1) = False
+            chkAns7.Checked = True
+        End If
+
+        If rad8Check(position - 1) = True Then
+            rad8Check(position - 1) = False
+            chkAns8.Checked = True
+        End If
     End Sub
     'Gets the text to display when the user clicks on the check answer button
     Private Sub CorrectAnswerTextQuery()
         Dim num As Integer = 1
 
-        For i As Integer = 0 To 5
+        For i As Integer = 0 To 7
             If answerKey(i) = "_" Then
                 correctAnswer(i) = ""
             Else
@@ -1110,7 +1405,7 @@
         Next
 
         Array.Sort(correctAnswer, New comparer)
-      End Sub
+    End Sub
     'Hide radio buttons and check boxes if there is no answer in that field
     Private Sub ShowHide_RadioAndChecks()
         If radAns1.Text = "_" Or chkAns1.Text = "_" Then
@@ -1184,15 +1479,43 @@
             lblAns6.Visible = True
             lblAns6_1.Visible = True
         End If
+
+        If radAns7.Text = "_" Or chkAns7.Text = "_" Then
+            radAns7.Visible = False
+            chkAns7.Visible = False
+            lblAns7.Visible = False
+            lblAns7_1.Visible = False
+        Else
+            radAns7.Visible = True
+            chkAns7.Visible = True
+            lblAns7.Visible = True
+            lblAns7_1.Visible = True
+        End If
+
+        If radAns8.Text = "_" Or chkAns8.Text = "_" Then
+            radAns8.Visible = False
+            chkAns8.Visible = False
+            lblAns8.Visible = False
+            lblAns8_1.Visible = False
+        Else
+            radAns8.Visible = True
+            chkAns8.Visible = True
+            lblAns8.Visible = True
+            lblAns8_1.Visible = True
+        End If
     End Sub
     Private Sub SetCurrentAnswers()
 
         'Sets the radio button answers text based on the first question 
         Dim num As Integer
+        currentAnswerCount = 0
         num = 1
-        For i As Integer = 0 To 5
+        For i As Integer = 0 To 7
             querySelect = num.ToString
             currentAnswers(i) = QueryAnswers(cq)
+            If currentAnswers(i) <> "_" Then
+                currentAnswerCount += 1
+            End If
             num += 1
         Next
 
@@ -1202,12 +1525,18 @@
         radAns4.Text = currentAnswers(3)
         radAns5.Text = currentAnswers(4)
         radAns6.Text = currentAnswers(5)
+        radAns7.Text = currentAnswers(6)
+        radAns8.Text = currentAnswers(7)
+
+
         chkAns1.Text = currentAnswers(0)
         chkAns2.Text = currentAnswers(1)
         chkAns3.Text = currentAnswers(2)
         chkAns4.Text = currentAnswers(3)
         chkAns5.Text = currentAnswers(4)
         chkAns6.Text = currentAnswers(5)
+        chkAns7.Text = currentAnswers(6)
+        chkAns8.Text = currentAnswers(7)
 
     End Sub
     Private Sub SetCorrectAnswer()
@@ -1215,7 +1544,7 @@
         'Sets the correct answer based on the current question
         Dim num As Integer
         num = 1
-        For i As Integer = 0 To 5
+        For i As Integer = 0 To 7
             querySelect = num.ToString
             answerKey(i) = QueryCorrectAnswers(cq)
             num += 1
@@ -1238,6 +1567,8 @@
             radAns4.Visible = False
             radAns5.Visible = False
             radAns6.Visible = False
+            radAns7.Visible = False
+            radAns8.Visible = False
 
             chkAns1.Visible = True
             chkAns2.Visible = True
@@ -1245,6 +1576,8 @@
             chkAns4.Visible = True
             chkAns5.Visible = True
             chkAns6.Visible = True
+            chkAns7.Visible = True
+            chkAns8.Visible = True
         Else
             'grpRadio.Text = "Select the correct answer below:"
             radAns1.Visible = True
@@ -1253,6 +1586,8 @@
             radAns4.Visible = True
             radAns5.Visible = True
             radAns6.Visible = True
+            radAns7.Visible = True
+            radAns8.Visible = True
 
             chkAns1.Visible = False
             chkAns2.Visible = False
@@ -1260,11 +1595,29 @@
             chkAns4.Visible = False
             chkAns5.Visible = False
             chkAns6.Visible = False
+            chkAns7.Visible = False
+            chkAns8.Visible = False
         End If
     End Sub
 
-   
-    Private Sub frmQuiz_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub btnNewQuiz_Click(sender As Object, e As EventArgs) Handles btnNewQuiz.Click
+        frmNewQuizWarning.Show()
+    End Sub
 
+    Public Sub Randomize_Questions()
+        If randomQuestions = True Then
+            RandomizeAnswerOrder()
+        End If
+    End Sub
+
+    Private Sub RandomizeAnswerOrder()
+        Dim rnd = New System.Random
+        For i = qIDNums.Count - 1 To 0 Step -1
+            Dim j = rnd.Next(0, i)
+            'swap
+            Dim tmp = qIDNums(j)
+            qIDNums(j) = qIDNums(i)
+            qIDNums(i) = tmp
+        Next
     End Sub
 End Class

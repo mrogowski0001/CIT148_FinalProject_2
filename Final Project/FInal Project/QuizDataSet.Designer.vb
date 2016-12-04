@@ -311,9 +311,19 @@ Partial Public Class QuizDataSet
         
         Private columnAnswerkey6 As Global.System.Data.DataColumn
         
+        Private columnanswer7 As Global.System.Data.DataColumn
+        
+        Private columnAnswerkey7 As Global.System.Data.DataColumn
+        
+        Private columnanswer8 As Global.System.Data.DataColumn
+        
+        Private columnAnswerkey8 As Global.System.Data.DataColumn
+        
         Private columnmultiSelect As Global.System.Data.DataColumn
         
         Private columnchapter As Global.System.Data.DataColumn
+        
+        Private columnIncorrectCount As Global.System.Data.DataColumn
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
@@ -464,6 +474,38 @@ Partial Public Class QuizDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property answer7Column() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnanswer7
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property Answerkey7Column() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnAnswerkey7
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property answer8Column() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnanswer8
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property Answerkey8Column() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnAnswerkey8
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public ReadOnly Property multiSelectColumn() As Global.System.Data.DataColumn
             Get
                 Return Me.columnmultiSelect
@@ -475,6 +517,14 @@ Partial Public Class QuizDataSet
         Public ReadOnly Property chapterColumn() As Global.System.Data.DataColumn
             Get
                 Return Me.columnchapter
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property IncorrectCountColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnIncorrectCount
             End Get
         End Property
         
@@ -515,9 +565,29 @@ Partial Public Class QuizDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Overloads Function AddQuestionsRow(ByVal question As String, ByVal answer1 As String, ByVal Answerkey1 As Boolean, ByVal answer2 As String, ByVal Answerkey2 As Boolean, ByVal answer3 As String, ByVal Answerkey3 As Boolean, ByVal answer4 As String, ByVal Answerkey4 As Boolean, ByVal answer5 As String, ByVal Answerkey5 As Boolean, ByVal answer6 As String, ByVal Answerkey6 As Boolean, ByVal multiSelect As Boolean, ByVal chapter As String) As QuestionsRow
+        Public Overloads Function AddQuestionsRow( _
+                    ByVal question As String,  _
+                    ByVal answer1 As String,  _
+                    ByVal Answerkey1 As Boolean,  _
+                    ByVal answer2 As String,  _
+                    ByVal Answerkey2 As Boolean,  _
+                    ByVal answer3 As String,  _
+                    ByVal Answerkey3 As Boolean,  _
+                    ByVal answer4 As String,  _
+                    ByVal Answerkey4 As Boolean,  _
+                    ByVal answer5 As String,  _
+                    ByVal Answerkey5 As Boolean,  _
+                    ByVal answer6 As String,  _
+                    ByVal Answerkey6 As Boolean,  _
+                    ByVal answer7 As String,  _
+                    ByVal Answerkey7 As Boolean,  _
+                    ByVal answer8 As String,  _
+                    ByVal Answerkey8 As Boolean,  _
+                    ByVal multiSelect As Boolean,  _
+                    ByVal chapter As String,  _
+                    ByVal IncorrectCount As Integer) As QuestionsRow
             Dim rowQuestionsRow As QuestionsRow = CType(Me.NewRow,QuestionsRow)
-            Dim columnValuesArray() As Object = New Object() {Nothing, question, answer1, Answerkey1, answer2, Answerkey2, answer3, Answerkey3, answer4, Answerkey4, answer5, Answerkey5, answer6, Answerkey6, multiSelect, chapter}
+            Dim columnValuesArray() As Object = New Object() {Nothing, question, answer1, Answerkey1, answer2, Answerkey2, answer3, Answerkey3, answer4, Answerkey4, answer5, Answerkey5, answer6, Answerkey6, answer7, Answerkey7, answer8, Answerkey8, multiSelect, chapter, IncorrectCount}
             rowQuestionsRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowQuestionsRow)
             Return rowQuestionsRow
@@ -554,8 +624,13 @@ Partial Public Class QuizDataSet
             Me.columnAnswerkey5 = MyBase.Columns("Answerkey5")
             Me.columnanswer6 = MyBase.Columns("answer6")
             Me.columnAnswerkey6 = MyBase.Columns("Answerkey6")
+            Me.columnanswer7 = MyBase.Columns("answer7")
+            Me.columnAnswerkey7 = MyBase.Columns("Answerkey7")
+            Me.columnanswer8 = MyBase.Columns("answer8")
+            Me.columnAnswerkey8 = MyBase.Columns("Answerkey8")
             Me.columnmultiSelect = MyBase.Columns("multiSelect")
             Me.columnchapter = MyBase.Columns("chapter")
+            Me.columnIncorrectCount = MyBase.Columns("IncorrectCount")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -589,10 +664,20 @@ Partial Public Class QuizDataSet
             MyBase.Columns.Add(Me.columnanswer6)
             Me.columnAnswerkey6 = New Global.System.Data.DataColumn("Answerkey6", GetType(Boolean), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnAnswerkey6)
+            Me.columnanswer7 = New Global.System.Data.DataColumn("answer7", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnanswer7)
+            Me.columnAnswerkey7 = New Global.System.Data.DataColumn("Answerkey7", GetType(Boolean), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnAnswerkey7)
+            Me.columnanswer8 = New Global.System.Data.DataColumn("answer8", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnanswer8)
+            Me.columnAnswerkey8 = New Global.System.Data.DataColumn("Answerkey8", GetType(Boolean), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnAnswerkey8)
             Me.columnmultiSelect = New Global.System.Data.DataColumn("multiSelect", GetType(Boolean), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnmultiSelect)
             Me.columnchapter = New Global.System.Data.DataColumn("chapter", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnchapter)
+            Me.columnIncorrectCount = New Global.System.Data.DataColumn("IncorrectCount", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnIncorrectCount)
             Me.columnID.AutoIncrement = true
             Me.columnID.AutoIncrementSeed = -1
             Me.columnID.AutoIncrementStep = -1
@@ -603,6 +688,8 @@ Partial Public Class QuizDataSet
             Me.columnanswer4.MaxLength = 255
             Me.columnanswer5.MaxLength = 255
             Me.columnanswer6.MaxLength = 255
+            Me.columnanswer7.MaxLength = 255
+            Me.columnanswer8.MaxLength = 255
             Me.columnchapter.MaxLength = 255
         End Sub
         
@@ -960,6 +1047,66 @@ Partial Public Class QuizDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property answer7() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableQuestions.answer7Column),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'answer7' in table 'Questions' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableQuestions.answer7Column) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property Answerkey7() As Boolean
+            Get
+                Try 
+                    Return CType(Me(Me.tableQuestions.Answerkey7Column),Boolean)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Answerkey7' in table 'Questions' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableQuestions.Answerkey7Column) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property answer8() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableQuestions.answer8Column),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'answer8' in table 'Questions' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableQuestions.answer8Column) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property Answerkey8() As Boolean
+            Get
+                Try 
+                    Return CType(Me(Me.tableQuestions.Answerkey8Column),Boolean)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Answerkey8' in table 'Questions' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableQuestions.Answerkey8Column) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property multiSelect() As Boolean
             Get
                 Try 
@@ -985,6 +1132,21 @@ Partial Public Class QuizDataSet
             End Get
             Set
                 Me(Me.tableQuestions.chapterColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property IncorrectCount() As Integer
+            Get
+                Try 
+                    Return CType(Me(Me.tableQuestions.IncorrectCountColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'IncorrectCount' in table 'Questions' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableQuestions.IncorrectCountColumn) = value
             End Set
         End Property
         
@@ -1158,6 +1320,54 @@ Partial Public Class QuizDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function Isanswer7Null() As Boolean
+            Return Me.IsNull(Me.tableQuestions.answer7Column)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub Setanswer7Null()
+            Me(Me.tableQuestions.answer7Column) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsAnswerkey7Null() As Boolean
+            Return Me.IsNull(Me.tableQuestions.Answerkey7Column)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetAnswerkey7Null()
+            Me(Me.tableQuestions.Answerkey7Column) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function Isanswer8Null() As Boolean
+            Return Me.IsNull(Me.tableQuestions.answer8Column)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub Setanswer8Null()
+            Me(Me.tableQuestions.answer8Column) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsAnswerkey8Null() As Boolean
+            Return Me.IsNull(Me.tableQuestions.Answerkey8Column)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetAnswerkey8Null()
+            Me(Me.tableQuestions.Answerkey8Column) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function IsmultiSelectNull() As Boolean
             Return Me.IsNull(Me.tableQuestions.multiSelectColumn)
         End Function
@@ -1178,6 +1388,18 @@ Partial Public Class QuizDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetchapterNull()
             Me(Me.tableQuestions.chapterColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsIncorrectCountNull() As Boolean
+            Return Me.IsNull(Me.tableQuestions.IncorrectCountColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetIncorrectCountNull()
+            Me(Me.tableQuestions.IncorrectCountColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     
@@ -1361,15 +1583,21 @@ Namespace QuizDataSetTableAdapters
             tableMapping.ColumnMappings.Add("Answerkey5", "Answerkey5")
             tableMapping.ColumnMappings.Add("answer6", "answer6")
             tableMapping.ColumnMappings.Add("Answerkey6", "Answerkey6")
+            tableMapping.ColumnMappings.Add("answer7", "answer7")
+            tableMapping.ColumnMappings.Add("Answerkey7", "Answerkey7")
+            tableMapping.ColumnMappings.Add("answer8", "answer8")
+            tableMapping.ColumnMappings.Add("Answerkey8", "Answerkey8")
             tableMapping.ColumnMappings.Add("multiSelect", "multiSelect")
             tableMapping.ColumnMappings.Add("chapter", "chapter")
+            tableMapping.ColumnMappings.Add("IncorrectCount", "IncorrectCount")
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.InsertCommand = New Global.System.Data.OleDb.OleDbCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
             Me._adapter.InsertCommand.CommandText = "INSERT INTO `Questions` (`question`, `answer1`, `Answerkey1`, `answer2`, `Answerk"& _ 
                 "ey2`, `answer3`, `Answerkey3`, `answer4`, `Answerkey4`, `answer5`, `Answerkey5`,"& _ 
-                " `answer6`, `Answerkey6`, `multiSelect`, `chapter`) VALUES (?, ?, ?, ?, ?, ?, ?,"& _ 
-                " ?, ?, ?, ?, ?, ?, ?, ?)"
+                " `answer6`, `Answerkey6`, `answer7`, `Answerkey7`, `answer8`, `Answerkey8`, `mul"& _ 
+                "tiSelect`, `chapter`, `IncorrectCount`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,"& _ 
+                " ?, ?, ?, ?, ?, ?, ?, ?, ?)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("question", Global.System.Data.OleDb.OleDbType.LongVarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "question", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("answer1", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "answer1", Global.System.Data.DataRowVersion.Current, false, Nothing))
@@ -1384,15 +1612,20 @@ Namespace QuizDataSetTableAdapters
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Answerkey5", Global.System.Data.OleDb.OleDbType.[Boolean], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Answerkey5", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("answer6", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "answer6", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Answerkey6", Global.System.Data.OleDb.OleDbType.[Boolean], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Answerkey6", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("answer7", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "answer7", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Answerkey7", Global.System.Data.OleDb.OleDbType.[Boolean], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Answerkey7", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("answer8", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "answer8", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Answerkey8", Global.System.Data.OleDb.OleDbType.[Boolean], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Answerkey8", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("multiSelect", Global.System.Data.OleDb.OleDbType.[Boolean], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "multiSelect", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("chapter", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "chapter", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IncorrectCount", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IncorrectCount", Global.System.Data.DataRowVersion.Current, false, Nothing))
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.OleDb.OleDbConnection()
-            Me._connection.ConnectionString = Global.FInal_Project.My.MySettings.Default.QuizConnectionString1
+            Me._connection.ConnectionString = Global.FInal_Project.My.MySettings.Default.QuizConnectionString6
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -1402,8 +1635,8 @@ Namespace QuizDataSetTableAdapters
             Me._commandCollection(0) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(0).Connection = Me.Connection
             Me._commandCollection(0).CommandText = "SELECT ID, question, answer1, Answerkey1, answer2, Answerkey2, answer3, Answerkey"& _ 
-                "3, answer4, Answerkey4, answer5, Answerkey5, answer6, Answerkey6, multiSelect, c"& _ 
-                "hapter FROM Questions"
+                "3, answer4, Answerkey4, answer5, Answerkey5, answer6, Answerkey6, answer7, Answe"& _ 
+                "rkey7, answer8, Answerkey8, multiSelect, chapter, IncorrectCount FROM Questions"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
         
@@ -1463,7 +1696,27 @@ Namespace QuizDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
-        Public Overloads Overridable Function Insert(ByVal question As String, ByVal answer1 As String, ByVal Answerkey1 As Boolean, ByVal answer2 As String, ByVal Answerkey2 As Boolean, ByVal answer3 As String, ByVal Answerkey3 As Boolean, ByVal answer4 As String, ByVal Answerkey4 As Boolean, ByVal answer5 As String, ByVal Answerkey5 As Boolean, ByVal answer6 As String, ByVal Answerkey6 As Boolean, ByVal multiSelect As Boolean, ByVal chapter As String) As Integer
+        Public Overloads Overridable Function Insert( _
+                    ByVal question As String,  _
+                    ByVal answer1 As String,  _
+                    ByVal Answerkey1 As Boolean,  _
+                    ByVal answer2 As String,  _
+                    ByVal Answerkey2 As Boolean,  _
+                    ByVal answer3 As String,  _
+                    ByVal Answerkey3 As Boolean,  _
+                    ByVal answer4 As String,  _
+                    ByVal Answerkey4 As Boolean,  _
+                    ByVal answer5 As String,  _
+                    ByVal Answerkey5 As Boolean,  _
+                    ByVal answer6 As String,  _
+                    ByVal Answerkey6 As Boolean,  _
+                    ByVal answer7 As String,  _
+                    ByVal Answerkey7 As Boolean,  _
+                    ByVal answer8 As String,  _
+                    ByVal Answerkey8 As Boolean,  _
+                    ByVal multiSelect As Boolean,  _
+                    ByVal chapter As String,  _
+                    ByVal IncorrectCount As Global.System.Nullable(Of Integer)) As Integer
             If (question Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(0).Value = Global.System.DBNull.Value
             Else
@@ -1505,11 +1758,28 @@ Namespace QuizDataSetTableAdapters
                 Me.Adapter.InsertCommand.Parameters(11).Value = CType(answer6,String)
             End If
             Me.Adapter.InsertCommand.Parameters(12).Value = CType(Answerkey6,Boolean)
-            Me.Adapter.InsertCommand.Parameters(13).Value = CType(multiSelect,Boolean)
-            If (chapter Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(14).Value = Global.System.DBNull.Value
+            If (answer7 Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(13).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(14).Value = CType(chapter,String)
+                Me.Adapter.InsertCommand.Parameters(13).Value = CType(answer7,String)
+            End If
+            Me.Adapter.InsertCommand.Parameters(14).Value = CType(Answerkey7,Boolean)
+            If (answer8 Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(15).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(15).Value = CType(answer8,String)
+            End If
+            Me.Adapter.InsertCommand.Parameters(16).Value = CType(Answerkey8,Boolean)
+            Me.Adapter.InsertCommand.Parameters(17).Value = CType(multiSelect,Boolean)
+            If (chapter Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(18).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(18).Value = CType(chapter,String)
+            End If
+            If (IncorrectCount.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(19).Value = CType(IncorrectCount.Value,Integer)
+            Else
+                Me.Adapter.InsertCommand.Parameters(19).Value = Global.System.DBNull.Value
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
             If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _

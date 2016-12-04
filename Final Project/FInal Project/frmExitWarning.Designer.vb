@@ -62,6 +62,7 @@ Partial Class frmExit
         Me.Controls.Add(Me.btnNo)
         Me.Controls.Add(Me.btnYes)
         Me.Controls.Add(Me.lblExitText)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.Name = "frmExit"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Exit the Quiz"

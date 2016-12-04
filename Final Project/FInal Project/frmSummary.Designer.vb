@@ -97,6 +97,7 @@ Partial Class frmSummary
         Me.Controls.Add(Me.lblTitle1)
         Me.Controls.Add(Me.lblSummartText)
         Me.Controls.Add(Me.lstSummary)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.Name = "frmSummary"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Summary"
