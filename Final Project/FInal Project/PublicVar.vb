@@ -57,7 +57,7 @@
     Public bNum As Integer = 0                              'Counter for loop to determine if there is a blank answer
     Public blankAnswer As Integer                           'total of blank answers
     Public checkedCorrectCount As Integer = 0               'Total of correct answers that have been checked
-    Public checkedInorrectCount As Integer = 0              'Total of incorrect answers that have been checked
+    Public checkedIncorrectCount As Integer = 0              'Total of incorrect answers that have been checked
 
     Public timerEnabled As Boolean = False
     Public timePerQuestion As Integer = 60

@@ -80,6 +80,8 @@ Partial Class frmQuiz
         Me.btnNewQuiz = New System.Windows.Forms.Button()
         Me.QuestionsTableAdapter = New FInal_Project.QuizDataSetTableAdapters.QuestionsTableAdapter()
         Me.txtIncorrectCount = New System.Windows.Forms.TextBox()
+        Me.txtMultiSelect = New System.Windows.Forms.TextBox()
+        Me.GroupTestItems = New System.Windows.Forms.GroupBox()
         Me.grpCheckedAnswers.SuspendLayout()
         Me.grpCheck.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
@@ -89,6 +91,7 @@ Partial Class frmQuiz
         CType(Me.QuizDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpNav.SuspendLayout()
         Me.grpControl.SuspendLayout()
+        Me.GroupTestItems.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnSubmit
@@ -213,7 +216,7 @@ Partial Class frmQuiz
         Me.grpCheck.Controls.Add(Me.chkAns5)
         Me.grpCheck.Controls.Add(Me.chkAns6)
         Me.grpCheck.Controls.Add(Me.chkAns3)
-        Me.grpCheck.Location = New System.Drawing.Point(1, 12)
+        Me.grpCheck.Location = New System.Drawing.Point(4, 8)
         Me.grpCheck.Name = "grpCheck"
         Me.grpCheck.Size = New System.Drawing.Size(824, 435)
         Me.grpCheck.TabIndex = 40
@@ -434,8 +437,8 @@ Partial Class frmQuiz
         '
         'Panel1
         '
-        Me.Panel1.Controls.Add(Me.grpRadio)
         Me.Panel1.Controls.Add(Me.grpCheck)
+        Me.Panel1.Controls.Add(Me.grpRadio)
         Me.Panel1.Location = New System.Drawing.Point(3, 28)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(834, 549)
@@ -461,7 +464,7 @@ Partial Class frmQuiz
         Me.grpRadio.Controls.Add(Me.radAns5)
         Me.grpRadio.Controls.Add(Me.radAns2)
         Me.grpRadio.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.grpRadio.Location = New System.Drawing.Point(1, 12)
+        Me.grpRadio.Location = New System.Drawing.Point(3, 8)
         Me.grpRadio.Name = "grpRadio"
         Me.grpRadio.Padding = New System.Windows.Forms.Padding(10)
         Me.grpRadio.Size = New System.Drawing.Size(824, 435)
@@ -494,7 +497,6 @@ Partial Class frmQuiz
         Me.radAns8.Name = "radAns8"
         Me.radAns8.Size = New System.Drawing.Size(632, 48)
         Me.radAns8.TabIndex = 36
-        Me.radAns8.TabStop = True
         Me.radAns8.Text = "radAns8"
         Me.radAns8.TextAlign = System.Drawing.ContentAlignment.TopLeft
         Me.radAns8.UseCompatibleTextRendering = True
@@ -508,7 +510,6 @@ Partial Class frmQuiz
         Me.radAns7.Name = "radAns7"
         Me.radAns7.Size = New System.Drawing.Size(632, 48)
         Me.radAns7.TabIndex = 35
-        Me.radAns7.TabStop = True
         Me.radAns7.Text = "radAns7"
         Me.radAns7.TextAlign = System.Drawing.ContentAlignment.TopLeft
         Me.radAns7.UseCompatibleTextRendering = True
@@ -577,7 +578,6 @@ Partial Class frmQuiz
         Me.radAns6.Name = "radAns6"
         Me.radAns6.Size = New System.Drawing.Size(632, 48)
         Me.radAns6.TabIndex = 5
-        Me.radAns6.TabStop = True
         Me.radAns6.Text = "radAns6"
         Me.radAns6.TextAlign = System.Drawing.ContentAlignment.TopLeft
         Me.radAns6.UseCompatibleTextRendering = True
@@ -591,7 +591,6 @@ Partial Class frmQuiz
         Me.radAns1.Name = "radAns1"
         Me.radAns1.Size = New System.Drawing.Size(632, 48)
         Me.radAns1.TabIndex = 0
-        Me.radAns1.TabStop = True
         Me.radAns1.Text = "radAns1"
         Me.radAns1.TextAlign = System.Drawing.ContentAlignment.TopLeft
         Me.radAns1.UseVisualStyleBackColor = True
@@ -604,7 +603,6 @@ Partial Class frmQuiz
         Me.radAns3.Name = "radAns3"
         Me.radAns3.Size = New System.Drawing.Size(632, 48)
         Me.radAns3.TabIndex = 2
-        Me.radAns3.TabStop = True
         Me.radAns3.Text = "radAns3"
         Me.radAns3.TextAlign = System.Drawing.ContentAlignment.TopLeft
         Me.radAns3.UseVisualStyleBackColor = True
@@ -617,7 +615,6 @@ Partial Class frmQuiz
         Me.radAns4.Name = "radAns4"
         Me.radAns4.Size = New System.Drawing.Size(632, 48)
         Me.radAns4.TabIndex = 3
-        Me.radAns4.TabStop = True
         Me.radAns4.Text = "radAns4"
         Me.radAns4.TextAlign = System.Drawing.ContentAlignment.TopLeft
         Me.radAns4.UseVisualStyleBackColor = True
@@ -630,7 +627,6 @@ Partial Class frmQuiz
         Me.radAns5.Name = "radAns5"
         Me.radAns5.Size = New System.Drawing.Size(632, 48)
         Me.radAns5.TabIndex = 4
-        Me.radAns5.TabStop = True
         Me.radAns5.Text = "radAns5"
         Me.radAns5.TextAlign = System.Drawing.ContentAlignment.TopLeft
         Me.radAns5.UseVisualStyleBackColor = True
@@ -643,7 +639,6 @@ Partial Class frmQuiz
         Me.radAns2.Name = "radAns2"
         Me.radAns2.Size = New System.Drawing.Size(632, 48)
         Me.radAns2.TabIndex = 29
-        Me.radAns2.TabStop = True
         Me.radAns2.Text = "ranAns2"
         Me.radAns2.TextAlign = System.Drawing.ContentAlignment.TopLeft
         Me.radAns2.UseVisualStyleBackColor = True
@@ -699,11 +694,29 @@ Partial Class frmQuiz
         '
         'txtIncorrectCount
         '
-        Me.txtIncorrectCount.Location = New System.Drawing.Point(866, 13)
+        Me.txtIncorrectCount.Location = New System.Drawing.Point(9, 18)
         Me.txtIncorrectCount.Name = "txtIncorrectCount"
         Me.txtIncorrectCount.Size = New System.Drawing.Size(100, 20)
         Me.txtIncorrectCount.TabIndex = 65
-        Me.txtIncorrectCount.Visible = False
+        '
+        'txtMultiSelect
+        '
+        Me.txtMultiSelect.Location = New System.Drawing.Point(9, 39)
+        Me.txtMultiSelect.Name = "txtMultiSelect"
+        Me.txtMultiSelect.Size = New System.Drawing.Size(100, 20)
+        Me.txtMultiSelect.TabIndex = 66
+        '
+        'GroupTestItems
+        '
+        Me.GroupTestItems.Controls.Add(Me.txtIncorrectCount)
+        Me.GroupTestItems.Controls.Add(Me.txtMultiSelect)
+        Me.GroupTestItems.Location = New System.Drawing.Point(857, 164)
+        Me.GroupTestItems.Name = "GroupTestItems"
+        Me.GroupTestItems.Size = New System.Drawing.Size(141, 100)
+        Me.GroupTestItems.TabIndex = 67
+        Me.GroupTestItems.TabStop = False
+        Me.GroupTestItems.Text = "Test Items(Not Visible)"
+        Me.GroupTestItems.Visible = False
         '
         'frmQuiz
         '
@@ -711,7 +724,7 @@ Partial Class frmQuiz
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1008, 691)
         Me.ControlBox = False
-        Me.Controls.Add(Me.txtIncorrectCount)
+        Me.Controls.Add(Me.GroupTestItems)
         Me.Controls.Add(Me.grpControl)
         Me.Controls.Add(Me.grpNav)
         Me.Controls.Add(Me.grpCheckedAnswers)
@@ -736,6 +749,8 @@ Partial Class frmQuiz
         CType(Me.QuizDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpNav.ResumeLayout(False)
         Me.grpControl.ResumeLayout(False)
+        Me.GroupTestItems.ResumeLayout(False)
+        Me.GroupTestItems.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -797,4 +812,6 @@ Partial Class frmQuiz
     Friend WithEvents QuizDataSet As FInal_Project.QuizDataSet
     Friend WithEvents QuestionsTableAdapter As FInal_Project.QuizDataSetTableAdapters.QuestionsTableAdapter
     Friend WithEvents txtIncorrectCount As System.Windows.Forms.TextBox
+    Friend WithEvents txtMultiSelect As System.Windows.Forms.TextBox
+    Friend WithEvents GroupTestItems As System.Windows.Forms.GroupBox
 End Class

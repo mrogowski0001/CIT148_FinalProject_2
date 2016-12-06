@@ -8,8 +8,6 @@ Public Class frmQuiz
     Private Sub frmQuiz_Load() Handles MyBase.Load
         'TODO: This line of code loads data into the 'QuizDataSet.Questions' table. You can move, or remove it, as needed.
         Me.QuestionsTableAdapter.Fill(Me.QuizDataSet.Questions)
-        'TODO: This line of code loads data into the 'QuizDataSet.Questions' table. You can move, or remove it, as needed.
-        Me.QuestionsTableAdapter.Fill(Me.QuizDataSet.Questions)
 
         'Query the number of questions in the database 
         totalQuestions = QueryNumQuestion()
@@ -19,20 +17,7 @@ Public Class frmQuiz
         arraySize = (totalQuestions - 1)                    'Set the size of the arrays based on total number of questions
 
         'ReDim arrays to resize them to the total number of questions
-        ReDim allQuestions(arraySize)
-        ReDim gradedAnswers(arraySize)
-        ReDim answerChecked(arraySize)
-        ReDim questionsAnswered(arraySize)
-        ReDim rad1Check(arraySize)
-        ReDim rad2Check(arraySize)
-        ReDim rad3Check(arraySize)
-        ReDim rad4Check(arraySize)
-        ReDim rad5Check(arraySize)
-        ReDim rad6Check(arraySize)
-        ReDim rad7Check(arraySize)
-        ReDim rad8Check(arraySize)
-        ReDim qIDNums(arraySize)
-        ReDim selectedAnswersString(arraySize)
+        ResetVariables()
 
         'sencne the ID number may not equal the position it is queried because it is needed to determine the selection of answers
         'and the how many answers there are as well as determining the correct answer(s).
@@ -118,7 +103,7 @@ Public Class frmQuiz
 
 
         incorrectCount = QueryIncorrectCount(cq)
-
+        txtIncorrectCount.Text = incorrectCount.ToString
     End Sub
 
 
@@ -153,7 +138,7 @@ Public Class frmQuiz
             grpRadio.Visible = True
             grpCheck.Visible = False
         End If
-
+        txtMultiSelect.Text = multiSelect.ToString
         'Disable the next button on the last question to prevent an error and ensure the back button is enabled.
         If position = totalQuestions Then
             btnNext.Enabled = False
@@ -194,7 +179,7 @@ Public Class frmQuiz
             RestoreCheckBoxes()
         End If
 
-
+        txtMultiSelect.Text = multiSelect.ToString
         incorrectCount = QueryIncorrectCount(cq)
         txtIncorrectCount.Text = incorrectCount.ToString
 
@@ -229,7 +214,7 @@ Public Class frmQuiz
             grpRadio.Visible = True
             grpCheck.Visible = False
         End If
-
+        txtMultiSelect.Text = multiSelect.ToString
         'Disable the previous question button if this is the first question
         If position = 1 Then
             btnPrevious.Enabled = False
@@ -809,8 +794,8 @@ Public Class frmQuiz
                 lblCorrectAnswers.Text = "Correct Answers: " & checkedCorrectCount.ToString
                 MessageBox.Show("Correct", "Correct")
             Else
-                checkedInorrectCount += 1
-                lblIncorrectAnswers.Text = "Incorrect Answers: " & checkedInorrectCount.ToString
+                checkedIncorrectCount += 1
+                lblIncorrectAnswers.Text = "Incorrect Answers: " & checkedIncorrectCount.ToString
                 If multiSelect = False Then
                     MessageBox.Show("Incorrect, the correect answer is: " & correctAnswer(0), "Incorrect")
                 Else
@@ -1250,6 +1235,7 @@ Public Class frmQuiz
                 txtIncorrectCount.Text = incorrectCount.ToString
             End If
             gradedAnswers(position - 1) = "Correct"
+            txtIncorrectCount.Text = incorrectCount.ToString
         Else
             If gradedAnswers(position - 1) = "Correct" Or gradedAnswers(position - 1) = "N/A" Then
                 incorrectCount += 1
@@ -1262,7 +1248,7 @@ Public Class frmQuiz
     End Sub
 
     Private Sub WriteDB()
-         provider = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source ="
+        provider = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source ="
         dataFile = "Data\Quiz.accdb"
         connString = provider & dataFile
         myConnection.ConnectionString = connString
@@ -1620,4 +1606,25 @@ Public Class frmQuiz
             qIDNums(i) = tmp
         Next
     End Sub
+
+    Private Sub ResetVariables()
+        ReDim allQuestions(arraySize)
+        ReDim gradedAnswers(arraySize)
+        ReDim answerChecked(arraySize)
+        ReDim questionsAnswered(arraySize)
+        ReDim rad1Check(arraySize)
+        ReDim rad2Check(arraySize)
+        ReDim rad3Check(arraySize)
+        ReDim rad4Check(arraySize)
+        ReDim rad5Check(arraySize)
+        ReDim rad6Check(arraySize)
+        ReDim rad7Check(arraySize)
+        ReDim rad8Check(arraySize)
+        ReDim qIDNums(arraySize)
+        ReDim selectedAnswersString(arraySize)
+        checkedCorrectCount = 0
+        checkedIncorrectCount = 0
+    End Sub
+
+ 
 End Class
