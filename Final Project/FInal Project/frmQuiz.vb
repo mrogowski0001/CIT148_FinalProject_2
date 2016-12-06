@@ -93,14 +93,16 @@ Public Class frmQuiz
         'Sets the radio button answers text based on the first question 
         SetCurrentAnswers()
 
-        'Sets the correct answer based on the current question
-
-
         'Sets the text if the Check Answer button is clicked. 
         CorrectAnswerTextQuery()
+        'Sets the correct answer based on the current question
         SetCorrectAnswer()
 
-
+        If totalQuestions = 1 Then
+            btnNext.Enabled = False
+        ElseIf totalQuestions >= 2 Then
+            btnNext.Enabled = True
+        End If
 
         incorrectCount = QueryIncorrectCount(cq)
         txtIncorrectCount.Text = incorrectCount.ToString
@@ -108,7 +110,6 @@ Public Class frmQuiz
 
 
     Private Sub btnNext_Click() Handles btnNext.Click
-        WriteDB()
         'Clear the radCheckTemp array (used for Checkboxes) 
         ReDim radCheckTemp(7)
 
@@ -186,7 +187,6 @@ Public Class frmQuiz
     End Sub
 
     Private Sub btnPrevious_Click() Handles btnPrevious.Click
-        WriteDB()
         ReDim radCheckTemp(7)
 
         'Temporarily store current radio button and check box status
@@ -1244,6 +1244,7 @@ Public Class frmQuiz
             gradedAnswers(position - 1) = "Incorrect"
 
         End If
+        WriteDB()
 
     End Sub
 
