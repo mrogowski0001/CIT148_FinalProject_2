@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
-  <asmv1:assemblyIdentity name="FInal Project.exe" version="1.0.0.5" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
+  <asmv1:assemblyIdentity name="Final Project.exe" version="1.0.0.6" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
+  <description asmv2:iconFile="Iconarchive-Red-Orb-Alphabet-Letter-Q.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="FInal Project" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
-    <commandLine file="FInal Project.exe" parameters="" />
+    <assemblyIdentity name="Final Project" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <commandLine file="Final Project.exe" parameters="" />
   </entryPoint>
   <trustInfo>
     <security>
@@ -42,24 +43,33 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="FInal Project.exe" size="166888">
-      <assemblyIdentity name="FInal Project" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Final Project.exe" size="326120">
+      <assemblyIdentity name="Final Project" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>VfjUd+sQR3UucD1qL9xTfd2e0C+/xX/RXxGZ/i3S/qc=</dsig:DigestValue>
+        <dsig:DigestValue>0V/w/r4juvY5zCswNZcKlzGS23ZDjRLUYaDnecuz7FU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="FInal Project.exe.config" size="2424">
+  <file name="Final Project.exe.config" size="2424">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
       <dsig:DigestValue>zaG0F96lxGxvyUF0ivmsM6yG3+7ln+A2WCBLH5pgCVg=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Iconarchive-Red-Orb-Alphabet-Letter-Q.ico" size="170139">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>SwfNETnxeyS8EUg1G5tzmYzSQBC4v37UYDA/QGB9a5o=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

@@ -1624,6 +1624,7 @@ Public Class frmQuiz
         ReDim selectedAnswersString(arraySize)
         checkedCorrectCount = 0
         checkedIncorrectCount = 0
+        totalCorrect = 0
     End Sub
 
  
